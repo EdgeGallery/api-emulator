@@ -1,0 +1,1346 @@
+swagger: '2.0'
+info:
+  title: Mp1 API
+  version: 1.0.0
+  description: The ETSI MEC ISG MEC011 Application Enablement API described using OpenAPI
+externalDocs:
+  description: ETSI MEC011 V1.1.1 Application Enablement
+  url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/011/01.01.01_60/gs_mec011v010101p.pdf'
+host: '127.0.0.1:80'
+basePath: /mep/mp1/v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Body.AppTerminationNotificationSubscription:
+    name: AppTerminationNotificationSubscription
+    description: >-
+      用于订阅指定app的下线事件，仅仅回调一次
+    in: body
+    required: false
+    schema:
+      $ref: '#/definitions/AppTerminationNotificationSubscription.Request'
+  Body.SerAvailabilityNotificationSubscription:
+    name: SerAvailabilityNotificationSubscription
+    description: >-
+      用于订阅满足条件的服务的上线事件，仅仅回调一次
+    in: body
+    required: false
+    schema:
+      $ref: '#/definitions/SerAvailabilityNotificationSubscription.Request'
+  Body.ServiceInfo:
+    name: ServiceInfo
+    description: >-
+      服务的信息，需要包含"state"状态
+    in: body
+    required: true
+    schema:
+      $ref: '#/definitions/ServiceInfo'
+  Path.AppInstanceId:
+    name: appInstanceId
+    description: >-
+      应用程序实例ID。请注意，appInstanceId由平台管理器分配，可以通过运行环境的环境变量获取"AppInstanceId"。
+    in: path
+    required: true
+    type: string
+    format: uri
+  Path.SubscriptionId:
+    name: subscriptionId
+    description: >-
+      订阅的ID号。
+    in: path
+    required: true
+    type: string
+    format: uri
+  Path.SubscriptionType:
+    name: subscriptionType
+    description: >-
+      订阅的类型
+    in: path
+    required: true
+    type: string
+    format: uri
+  Path.ServiceId:
+    name: serviceId
+    description: 服务的ID
+    in: path
+    required: true
+    type: string
+    format: uri
+  Query.Ser_category_id:
+    name: ser_category_id
+    description: >-
+      服务的类别ID，用于服务发现。匹配服务信息中serCategory里的ID
+    in: query
+    required: false
+    type: string
+  Query.Ser_instance_id:
+    name: ser_instance_id
+    description: >-
+      服务ID，用于服务发现。匹配服务信息中的serInstanceId
+    in: query
+    required: false
+    type: array
+    items:
+      type: string
+  Query.Ser_name:
+    name: ser_name
+    description: >-
+      服务名，用于服务发现。匹配服务信息中的serName
+    in: query
+    required: false
+    type: array
+    items:
+      type: string
+paths:
+  '/applications/{appInstanceId}':
+    patch:
+      description: >-
+        app的状态更新，需要app应用激活后，主动上报上线状态，退出时，主动上报下线
+      operationId: ApplicationStatus.PATCH
+      produces: 
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Path.AppInstanceId'
+        - name: appInstanceStatus
+          description: >-
+            The mobile edge application status.
+          in: body
+          required: true
+          schema: 
+            $ref: '#/definitions/AppInstanceStatus'
+      responses:
+        '200':
+          description: >-
+            Successfully modify the mobile edge application instance running status.
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  '/applications/{appInstanceId}/subscriptions':
+    parameters:
+      - $ref: '#/parameters/Path.AppInstanceId'
+    get:
+      description: >-
+        查询app的所有订阅信息
+      operationId: ApplicationsSubscriptions.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            Upon success, a response body containing the list of links to the
+            requested subscriptions is returned.
+          schema:
+            type: object
+            properties:
+              Mp1SubscriptionLinkList:
+                $ref: '#/definitions/Mp1SubscriptionLinkList'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+    post:
+      description: >-
+        通过POST方法，创建一个新的订阅。订阅的事件有两种：SerAvailabilityNotificationSubscription或AppTerminationNotificationSubscription，订阅通知为POST callbackReference。
+        订阅有可能立即就触发。
+        SerAvailabilityNotificationSubscription：将订阅满足指定条件的服务，callbackReference为事件响应的接收url，filteringCriteria中携带的是要求完全匹配的条件，结构与ServiceInfo一样，可以只选择任意的部分参数作为条件。
+        AppTerminationNotificationSubscription：订阅指定app的下线事件。
+      operationId: ApplicationsSubscriptions.POST
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Body.SerAvailabilityNotificationSubscription'
+        - $ref: '#/parameters/Body.AppTerminationNotificationSubscription'
+      responses:
+        '201':
+          description: >-
+            Entity body in the request contains a subscription to the mobile
+            edge service availability notifications that is to be created.
+          schema:
+            type: object
+            properties:
+              SerAvailabilityNotificationSubscription:
+                $ref: '#/definitions/SerAvailabilityNotificationSubscription.Response'
+              AppTerminationNotificationSubscription:
+                $ref: '#/definitions/AppTerminationNotificationSubscription.Response'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  '/applications/{appInstanceId}/subscriptions/{subscriptionType}/{subscriptionId}':
+    parameters:
+      - $ref: '#/parameters/Path.AppInstanceId'
+      - $ref: '#/parameters/Path.SubscriptionType'
+      - $ref: '#/parameters/Path.SubscriptionId'
+    get:
+      description: >-
+        查询指定app下的订阅信息
+      operationId: ApplicationsSubscription.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            Upon success, a response body containing the requested subscription
+            is returned.
+          schema:
+            type: object
+            properties:
+              SerAvailabilityNotificationSubscription:
+                $ref: '#/definitions/SerAvailabilityNotificationSubscription.Response'
+              AppTerminationNotificationSubscription:
+                $ref: '#/definitions/AppTerminationNotificationSubscription.Response'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+    delete:
+      description: >-
+        删除指定的订阅，经常用于订阅者接收到事件回调
+      operationId: ApplicationsSubscription.DELETE
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  /services:
+    get:
+      description: >-
+        查找满足条件的服务信息列表
+      operationId: Services.GET
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Query.Ser_instance_id'
+        - $ref: '#/parameters/Query.Ser_name'
+        - $ref: '#/parameters/Query.Ser_category_id'
+      responses:
+        '200':
+          description: >-
+            It is used to indicate nonspecific success. The response body
+            contains a representation of the resource.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                ServiceInfo:
+                  $ref: '#/definitions/ServiceInfo'
+          examples:
+            application/json:
+              - ServiceInfo:
+                  serInstanceId: ServiceInstance123
+                  serName: ExampleService
+                  serCategory:
+                    href: catItem1
+                    id: id12345
+                    name: RNI
+                    version: version1
+                  version: ServiceVersion1
+                  state: ACTIVE
+                  transportId: Rest1
+                  transportInfo:
+                    id: TransId12345
+                    name: REST
+                    description: REST API
+                    type: JSON
+                    protocol: HTTP
+                    version: '2.0'
+                    endpoint:
+                      uris:
+                        - /meMp1/service/EntryPoint
+                      addresses:
+                        - host: example.com
+                          port: '8080'
+                    security:
+                      oAuth2Info:
+                        grantTypes: OAUTH2_CLIENT_CREDENTIALS
+                        tokenEndpoint: /meMp1/security/TokenEndPoint
+                  serializer: JSON
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+    post:
+      description: >-
+        注册一个新的服务，不携带serInstanceId
+      operationId: Services.POST
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Body.ServiceInfo'
+      responses:
+        '201':
+          description: >-
+            创建成功，会在响应的头域里面携带"Location"标记资源的URI，同时添加serInstanceId
+          schema:
+            type: object
+            properties:
+              ServiceInfo:
+                $ref: '#/definitions/ServiceInfo'
+          examples:
+            application/json:
+              ServiceInfo:
+                serInstanceId: ServiceInstance123
+                serName: ExampleService
+                serCategory:
+                  href: catItem1
+                  id: id12345
+                  name: RNI
+                  version: version1
+                version: ServiceVersion1
+                state: ACTIVE
+                transportId: Rest1
+                transportInfo:
+                  id: TransId12345
+                  name: REST
+                  description: REST API
+                  type: JSON
+                  protocol: HTTP
+                  version: '2.0'
+                  endpoint:
+                    uris:
+                      - /meMp1/service/EntryPoint
+                    addresses:
+                      - host: example.com
+                        port: '8080'
+                  security:
+                    oAuth2Info:
+                      grantTypes: OAUTH2_CLIENT_CREDENTIALS
+                      tokenEndpoint: /meMp1/security/TokenEndPoint
+                serializer: JSON
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  '/services/{serviceId}':
+    parameters:
+      - $ref: '#/parameters/Path.ServiceId'
+    get:
+      description: >-
+        查询指定资源信息，经常用于查询服务可用性
+      operationId: ServicesServiceId.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            表示查询成功，响应体中包含具体的服务信息
+          schema:
+            type: object
+            properties:
+              ServiceInfo:
+                $ref: '#/definitions/ServiceInfo'
+          examples:
+            application/json:
+              ServiceInfo:
+                serInstanceId: ServiceInstance123
+                serName: ExampleService
+                serCategory:
+                  href: catItem1
+                  id: id12345
+                  name: RNI
+                  version: version1
+                version: ServiceVersion1
+                state: ACTIVE
+                transportId: Rest1
+                transportInfo:
+                  id: TransId12345
+                  name: REST
+                  description: REST API
+                  type: JSON
+                  protocol: HTTP
+                  version: '2.0'
+                  endpoint:
+                    uris:
+                      - /meMp1/service/EntryPoint
+                    addresses:
+                      - host: example.com
+                        port: '8080'
+                  security:
+                    oAuth2Info:
+                      grantTypes: OAUTH2_CLIENT_CREDENTIALS
+                      tokenEndpoint: /meMp1/security/TokenEndPoint
+                serializer: JSON
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+    put:
+      description: 更新指定服务的信息
+      operationId: ServicesServiceId.PUT
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Body.ServiceInfo'
+      responses:
+        '200':
+          description: >-
+            Upon success, a response body containing data type describing the
+            updated ServiceInfo is returned
+          schema:
+            type: object
+            properties:
+              ServiceInfo:
+                $ref: '#/definitions/ServiceInfo'
+          examples:
+            application/json:
+              ServiceInfo:
+                serInstanceId: ServiceInstance123
+                serName: ExampleService
+                serCategory:
+                  href: catItem1
+                  id: id12345
+                  name: RNI
+                  version: version1
+                version: ServiceVersion1
+                state: ACTIVE
+                transportId: Rest1
+                transportInfo:
+                  id: TransId12345
+                  name: REST
+                  description: REST API
+                  type: JSON
+                  protocol: HTTP
+                  version: '2.0'
+                  endpoint:
+                    uris:
+                      - /meMp1/service/EntryPoint
+                    addresses:
+                      - host: example.com
+                        port: '8080'
+                  security:
+                    oAuth2Info:
+                      grantTypes: OAUTH2_CLIENT_CREDENTIALS
+                      tokenEndpoint: /meMp1/security/TokenEndPoint
+                serializer: JSON
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '412':
+          description: Precondition Failed
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  /timing/current_time:
+    get:
+      description: >-
+        用于获取平台的当前信息
+      operationId: TimingCurrentTime.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            It is used to indicate nonspecific success. The response body
+            contains a representation of the resource.
+          schema:
+            type: object
+            properties:
+              CurrentTime:
+                $ref: '#/definitions/CurrentTime'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  /timing/timing_caps:
+    get:
+      description: >-
+        用于检索平台的计时功能的信息
+      operationId: TimingCaps.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            It is used to indicate nonspecific success. The response body
+            contains a representation of the resource.
+          schema:
+            type: object
+            properties:
+              TimingCaps:
+                $ref: '#/definitions/TimingCaps'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+  /transports:
+    get:
+      description: >-
+        此方法检索有关可用传输列表的信息。
+      operationId: Transports.GET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: >-
+            It is used to indicate nonspecific success. The response body
+            contains a representation of the resource.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                TransportInfo:
+                  $ref: '#/definitions/TransportInfo'
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '403':
+          description: Forbidden
+          schema:
+            type: object
+            required:
+              - ProblemDetails
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            type: object
+            properties:
+              ProblemDetails:
+                $ref: '#/definitions/ProblemDetails'
+definitions:
+  AppInstanceStatus:
+    description: app的状态
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+    example: ACTIVE
+  AppTerminationNotification.MaxGracefulTimeout:
+    description: >-
+      app实例优雅停止的最长时间，单位为秒
+    type: string
+    format: uint32
+    example: 10
+  AppTerminationNotification.NotificationType:
+    description: 通知类型：AppTerminationNotification.
+    type: string
+    example: AppTerminationNotification
+  AppTerminationNotification:
+    description: >-
+      平台向订阅者通知app的停止信息
+    type: object
+    required:
+      - notificationType
+      - maxGracefulTimeout
+      - _links
+    properties:
+      notificationType:
+        $ref: '#/definitions/AppTerminationNotification.NotificationType'
+      maxGracefulTimeout:
+        $ref: '#/definitions/AppTerminationNotification.MaxGracefulTimeout'
+      _links:
+        $ref: '#/definitions/Subscription'
+  AppTerminationNotificationSubscription.AppInstanceId:
+    description: 目标app实例id，订阅通过目标app的id作为过滤条件，监听该app的停止事件
+    type: string
+    example: ID1
+  AppTerminationNotificationSubscription.CallbackReference:
+    description: >-
+      事件通知的接收URL，目标app停止后，事件信息将POST到该URL
+    type: string
+    format: uri
+  AppTerminationNotificationSubscription.Request:
+    description: >-
+      订阅请求的信息，用于订阅指定的app id的退出事件
+    type: object
+    required:
+      - subscriptionType
+      - callbackReference
+      - appInstanceId
+    properties:
+      subscriptionType:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.SubscriptionType'
+      callbackReference:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.CallbackReference'
+      appInstanceId:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.AppInstanceId'
+  AppTerminationNotificationSubscription.Response:
+    description: >-
+      平台接收订阅请求后，返回的响应信息，包含订阅的资源路径（用于删除订阅）
+    type: object
+    required:
+      - subscriptionType
+      - callbackReference
+      - _links
+      - appInstanceId
+    properties:
+      subscriptionType:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.SubscriptionType'
+      callbackReference:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.CallbackReference'
+      _links:
+        $ref: '#/definitions/Self'
+      appInstanceId:
+        $ref: '#/definitions/AppTerminationNotificationSubscription.AppInstanceId'
+  AppTerminationNotificationSubscription.SubscriptionType:
+    description: 订阅类型：AppTerminationNotificationSubscription.
+    type: string
+    example: AppTerminationNotificationSubscription
+  CategoryRef.Href:
+    description: 类型的参考信息
+    type: string
+    example: catItem1
+  CategoryRef.Id:
+    description: 类型的ID号
+    type: string
+    example: id12345
+  CategoryRef.Name:
+    description: 类型名字
+    type: string
+    example: RNI
+  CategoryRef.Version:
+    description: 类型版本
+    type: string
+    example: version1
+  CategoryRef:
+    description: 服务的类别信息
+    type: object
+    required:
+      - href
+      - id
+      - name
+      - version
+    properties:
+      href:
+        $ref: '#/definitions/CategoryRef.Href'
+      id:
+        $ref: '#/definitions/CategoryRef.Id'
+      name:
+        $ref: '#/definitions/CategoryRef.Name'
+      version:
+        $ref: '#/definitions/CategoryRef.Version'
+  CurrentTime:
+    description: >-
+      平台的当前时间信息
+    type: object
+    required:
+      - nanoSeconds
+      - seconds
+      - timeSourceStatus
+    properties:
+      seconds:
+        type: integer
+        format: uint32
+        description: >-
+          当前的时间，以秒为单位. 起始时间为January 1, 1970, 00:00:00 UTC
+        example: 1577836800
+      nanoSeconds:
+        type: integer
+        format: uint32
+        description: >-
+          当前时间的纳秒部分. 起始时间为January 1, 1970, 00:00:00 UTC
+        example: 0
+      timeSourceStatus:
+        type: string
+        enum:
+          - TRACEABLE
+          - NONTRACEABLE
+        description: >-
+          时间源状态. 1 = TRACEABLE - 时间源锁定于UTC
+          2 = NONTRACEABLE - 时间源不锁定于UTC
+        example: TRACEABLE
+  EndPointInfo.Address.Host:
+    description: 地址的Host部分,必须为域名
+    type: string
+    example: example.com
+  EndPointInfo.Address.Port:
+    description: 地址的端口部分
+    type: integer
+    format: uint32
+    example: '8080'
+  EndPointInfo.Address:
+    description: 地址信息
+    type: object
+    properties:
+      host:
+        $ref: '#/definitions/EndPointInfo.Address.Host'
+      port:
+        $ref: '#/definitions/EndPointInfo.Address.Port'
+  EndPointInfo.Addresses:
+    description: >-
+      服务的地址信息列表
+    type: array
+    items:
+      $ref: '#/definitions/EndPointInfo.Address'
+  EndPointInfo.Alternative:
+    description: >-
+      服务的扩展信息
+    type: object
+  EndPointInfo.Uri:
+    description: Entry point information of the service
+    type: string
+    format: uri
+    example: /meMp1/service/EntryPoint
+  EndPointInfo.Uris:
+    description: >-
+      Entry point information of the service as string, formatted according to
+      URI syntax
+    type: array
+    items:
+      $ref: '#/definitions/EndPointInfo.Uri'
+  EndPointInfo:
+    description: 此类型表示有关传输端点的信息
+    type: object
+    properties:
+      uris:
+        $ref: '#/definitions/EndPointInfo.Uris'
+      addresses:
+        $ref: '#/definitions/EndPointInfo.Addresses'
+      alternative:
+        $ref: '#/definitions/EndPointInfo.Alternative'
+  LinkType:
+    description: 资源的URI
+    type: string
+    format: uri
+    example: /meMp1/example
+  Mp1SubscriptionLinkList.Links:
+    description: Self-referring URI.
+    type: object
+    required:
+      - self
+    properties:
+      self:
+        $ref: '#/definitions/LinkType'
+      subscription:
+        description: Subscription list
+        type: array
+        items:
+          $ref: '#/definitions/Mp1SubscriptionLinkList.Subscription'
+  Mp1SubscriptionLinkList.Subscription:
+    description: 订阅的链接信息.
+    type: object
+    required:
+      - href
+      - rel
+    properties:
+      href:
+        description: 订阅资源在平台上的URI
+        type: string
+        format: uri
+      rel:
+        description: >-
+          值为订阅信息中的"subscriptionType"的值
+        type: string
+  Mp1SubscriptionLinkList:
+    description: >-
+      此类型表示与移动边缘应用程序实例的当前现有订阅相关的链接列表。
+    type: object
+    required:
+      - _links
+    properties:
+      _links:
+        $ref: '#/definitions/Mp1SubscriptionLinkList.Links'
+  ProblemDetails:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/Problem.type'
+      title:
+        $ref: '#/definitions/Problem.title'
+      status:
+        $ref: '#/definitions/Problem.status'
+      detail:
+        $ref: '#/definitions/Problem.detail'
+      instance:
+        $ref: '#/definitions/Problem.instance'
+  Problem.detail:
+    type: string
+    description: A human-readable explanation specific to this occurrence of the problem
+  Problem.instance:
+    type: string
+    format: uri
+    description: A URI reference that identifies the specific occurrence of the problem
+  Problem.status:
+    type: integer
+    format: uint32
+    description: The HTTP status code for this occurrence of the problem
+  Problem.title:
+    type: string
+    description: 'A short, human-readable summary of the problem type'
+  Problem.type:
+    type: string
+    format: uri
+    description: >-
+      A URI reference according to IETF RFC 3986 that identifies the problem
+      type
+  SecurityInfo.OAuth2Info.GrantTypes:
+    description: List of supported OAuth 2.0 grant types
+    type: string
+    enum:
+      - OAUTH2_AUTHORIZATION_CODE
+      - OAUTH2_IMPLICIT_GRANT
+      - OAUTH2_RESOURCE_OWNER
+      - OAUTH2_CLIENT_CREDENTIALS
+    example: OAUTH2_CLIENT_CREDENTIALS
+  SecurityInfo.OAuth2Info.TokenEndpoint:
+    description: The token endpoint
+    type: string
+    format: uri
+    example: /meMp1/security/TokenEndPoint
+  SecurityInfo.OAuth2Info:
+    description: OAuth 2.0相关的参数
+    required:
+      - grantTypes
+      - tokenEndpoint
+    properties:
+      grantTypes:
+        $ref: '#/definitions/SecurityInfo.OAuth2Info.GrantTypes'
+      tokenEndpoint:
+        $ref: '#/definitions/SecurityInfo.OAuth2Info.TokenEndpoint'
+  SecurityInfo:
+    description: 用于传输的安全相关信息
+    type: object
+    required:
+      - oAuth2Info
+    properties:
+      oAuth2Info:
+        $ref: '#/definitions/SecurityInfo.OAuth2Info'
+  Self:
+    description: Self-referring URI.
+    type: object
+    required:
+      - self
+    properties:
+      self:
+        $ref: '#/definitions/LinkType'
+  ServiceAvailabilityNotification.NotificationType:
+    description: 通知类型：ServiceAvailabilityNotification.
+    type: string
+    example: ServiceAvailabilityNotification
+  ServiceAvailabilityNotification:
+    description: >-
+      通知消息，关于订阅匹配到有效的服务信息，将通过POST方法发送给订阅者
+    type: object
+    required:
+      - notificationType
+      - serivices
+      - _links
+    properties:
+      notificationType:
+        $ref: '#/definitions/ServiceAvailabilityNotification.NotificationType'
+      serivices:
+        description: Service list
+        type: array
+        items:
+          $ref: '#/definitions/ServiceInfo'
+      _links:
+        $ref: '#/definitions/Self'
+  SerAvailabilityNotificationSubscription.CallbackReference:
+    description: >-
+      消息订阅者接收通知的URL
+    type: string
+    format: uri
+    example: "http://app1.com:80/notification"
+  SerAvailabilityNotificationSubscription.Request:
+    description: >-
+      用于订阅指定服务上线的通知，在订阅的请求中携带，包含服务的过滤条件filteringCriteria。
+      filteringCriteria里的内容格式为ServiceInfo的子集，都匹配时，通过POST callbackReference通知
+    type: object
+    required:
+      - subscriptionType
+      - callbackReference
+      - filteringCriteria
+    properties:
+      subscriptionType:
+        $ref: '#/definitions/SerAvailabilityNotificationSubscription.SubscriptionType'
+      callbackReference:
+        $ref: >-
+          #/definitions/SerAvailabilityNotificationSubscription.CallbackReference
+      filteringCriteria:
+        $ref: '#/definitions/ServiceInfo'
+  SerAvailabilityNotificationSubscription.Response:
+    description: >-
+      平台接收订阅消息后的响应，增加了订阅资源在平台上的URI，用于删除订阅
+    type: object
+    required:
+      - subscriptionType
+      - callbackReference
+      - _links
+      - filteringCriteria
+    properties:
+      subscriptionType:
+        $ref: '#/definitions/SerAvailabilityNotificationSubscription.SubscriptionType'
+      callbackReference:
+        $ref: >-
+          #/definitions/SerAvailabilityNotificationSubscription.CallbackReference
+      _links:
+        $ref: '#/definitions/Self'
+      filteringCriteria:
+        $ref: '#/definitions/ServiceInfo'
+  SerAvailabilityNotificationSubscription.SubscriptionType:
+    description: 服务订阅类型：SerAvailabilityNotificationSubscription.
+    type: string
+    example: SerAvailabilityNotificationSubscription
+  SerializerTypes:
+    description: 数据格式类型，JSON、XML或PROTOBUF3
+    type: string
+    enum:
+      - JSON
+      - XML
+      - PROTOBUF3
+    example: JSON
+  ServiceInfo.SerInstanceId:
+    description: >-
+      由平台分配的服务实例的标识符。新服务注册时不需要携带
+    type: string
+    example: ServiceInstance123
+  ServiceInfo.SerName:
+    description: >-
+      服务名
+    type: string
+    example: ExampleService
+  ServiceInfo.State:
+    description: 服务的状态，ACTIVE或INACTIVE
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+    example: ACTIVE
+  ServiceInfo.TransportId:
+    description: >-
+      传输标识
+    type: string
+    example: Rest1
+  ServiceInfo.Version:
+    description: 服务的版本
+    type: string
+    example: ServiceVersion1
+  ServiceInfo:
+    description: 服务的信息
+    type: object
+    required:
+      - serName
+      - version
+      - state
+      - serializer
+    properties:
+      serInstanceId:
+        $ref: '#/definitions/ServiceInfo.SerInstanceId'
+      serName:
+        $ref: '#/definitions/ServiceInfo.SerName'
+      serCategory:
+        $ref: '#/definitions/CategoryRef'
+      version:
+        $ref: '#/definitions/ServiceInfo.Version'
+      state:
+        $ref: '#/definitions/ServiceInfo.State'
+      transportId:
+        $ref: '#/definitions/ServiceInfo.TransportId'
+      transportInfo:
+        $ref: '#/definitions/TransportInfo'
+      serializer:
+        $ref: '#/definitions/SerializerTypes'
+  Subscription:
+    description: 订阅链接
+    type: object
+    required:
+      - subscription
+    properties:
+      subscription:
+        $ref: '#/definitions/LinkType'
+  TimingCaps.NtpServers.AuthenticationKeyNum:
+    description: Authentication key number
+    type: integer
+    format: uint32
+    example: 1
+  TimingCaps.NtpServers.AuthenticationOption:
+    description: NTP authentication option
+    type: string
+    enum:
+      - NONE
+      - SYMMETRIC_KEY
+      - AUTO_KEY
+    example: NONE
+  TimingCaps.NtpServers.DelayReqMaxRate:
+    description: Acceptable maximum rate of the Delay_Req messages in packets per second
+    type: integer
+    format: uint32
+    example: 10
+  TimingCaps.NtpServers.LocalPriority:
+    description: NTP server local priority
+    type: integer
+    format: uint32
+    example: 1
+  TimingCaps.NtpServers.MaxPollingInterval:
+    description: >-
+      Maximum poll interval for NTP messages, in seconds as a power of two.
+      Range 3...17
+    type: integer
+    format: uint32
+    example: 17
+  TimingCaps.NtpServers.MinPollingInterval:
+    description: >-
+      Minimum poll interval for NTP messages, in seconds as a power of two.
+      Range 3...17
+    type: integer
+    format: uint32
+    example: 3
+  TimingCaps.NtpServers.NtpServerAddr:
+    description: NTP server address
+    type: string
+    example: 192.0.2.0
+  TimingCaps.NtpServers.NtpServerAddrType:
+    description: Address type of NTP server
+    type: string
+    enum:
+      - IP_ADDRESS
+      - DNS_NAME
+    example: IP_ADDRESS
+  TimingCaps.NtpServers.PtpMasterIpAddress:
+    description: PTP Master IP Address
+    type: string
+    example: 192.0.2.0
+  TimingCaps.NtpServers.PtpMasterLocalPriority:
+    description: PTP Master local priority
+    type: integer
+    format: uint32
+    example: 1
+  TimingCaps.NtpServers:
+    description: NTP server detail.
+    type: object
+    required:
+      - ntpServerAddrType
+      - ntpServerAddr
+      - minPollingInterval
+      - maxPollingInterval
+      - localPriority
+      - authenticationOption
+      - authenticationKeyNum
+    properties:
+      ntpServerAddrType:
+        $ref: '#/definitions/TimingCaps.NtpServers.NtpServerAddrType'
+      ntpServerAddr:
+        $ref: '#/definitions/TimingCaps.NtpServers.NtpServerAddr'
+      minPollingInterval:
+        $ref: '#/definitions/TimingCaps.NtpServers.MinPollingInterval'
+      maxPollingInterval:
+        $ref: '#/definitions/TimingCaps.NtpServers.MaxPollingInterval'
+      localPriority:
+        $ref: '#/definitions/TimingCaps.NtpServers.LocalPriority'
+      authenticationOption:
+        $ref: '#/definitions/TimingCaps.NtpServers.AuthenticationOption'
+      authenticationKeyNum:
+        $ref: '#/definitions/TimingCaps.NtpServers.AuthenticationKeyNum'
+  TimingCaps.PtpMasters:
+    description: NTP server detail.
+    type: object
+    required:
+      - ptpMasterIpAddress
+      - ptpMasterLocalPriority
+      - delayReqMaxRate
+    properties:
+      ptpMasterIpAddress:
+        $ref: '#/definitions/TimingCaps.NtpServers.PtpMasterIpAddress'
+      ptpMasterLocalPriority:
+        $ref: '#/definitions/TimingCaps.NtpServers.PtpMasterLocalPriority'
+      delayReqMaxRate:
+        $ref: '#/definitions/TimingCaps.NtpServers.DelayReqMaxRate'
+  TimingCaps.TimeStamp:
+    description: time
+    type: object
+    required:
+      - nanoSeconds
+      - seconds
+    properties:
+      seconds:
+        type: integer
+        format: uint32
+        description: >-
+          The seconds part of the time. Time is defined as Unix-time since
+          January 1, 1970, 00:00:00 UTC
+        example: 1577836800
+      nanoSeconds:
+        type: integer
+        format: uint32
+        description: >-
+          The nanoseconds part of the time. Time is defined as Unix-time since
+          January 1, 1970, 00:00:00 UTC
+        example: 0
+  TimingCaps:
+    description: >-
+      This type represents the information provided by the mobile edge platform
+      in response to the Timing capabilities Query message.
+    type: object
+    properties:
+      timeStamp:
+        $ref: '#/definitions/TimingCaps.TimeStamp'
+      ntpServers:
+        description: Available NTP servers
+        type: array
+        items:
+          $ref: '#/definitions/TimingCaps.NtpServers'
+      ptpMasters:
+        description: Available PTP Masters
+        type: array
+        items:
+          $ref: '#/definitions/TimingCaps.PtpMasters'
+  TransportInfo.Description:
+    description: Human-readable description of this transport
+    type: string
+    example: REST API
+  TransportInfo.Id:
+    description: The identifier of this transport
+    type: string
+    example: TransId12345
+  TransportInfo.ImplSpecificInfo:
+    description: Additional implementation specific details of the transport
+    type: object
+  TransportInfo.Name:
+    description: The name of this transport
+    type: string
+    example: REST
+  TransportInfo.Protocol:
+    description: The name of the protocol used. Shall be set to HTTP for a REST API.
+    type: string
+    example: HTTP
+  TransportInfo.Version:
+    description: The version of the protocol used
+    type: string
+    example: '2.0'
+  TransportInfo:
+    description: This type represents the general information of a mobile edge service.
+    type: object
+    required:
+      - id
+      - name
+      - type
+      - protocol
+      - version
+      - endpoint
+      - security
+    properties:
+      id:
+        $ref: '#/definitions/TransportInfo.Id'
+      name:
+        $ref: '#/definitions/TransportInfo.Name'
+      description:
+        $ref: '#/definitions/TransportInfo.Description'
+      type:
+        $ref: '#/definitions/TransportTypes'
+      protocol:
+        $ref: '#/definitions/TransportInfo.Protocol'
+      version:
+        $ref: '#/definitions/TransportInfo.Version'
+      endpoint:
+        $ref: '#/definitions/EndPointInfo'
+      security:
+        $ref: '#/definitions/SecurityInfo'
+      implSpecificInfo:
+        $ref: '#/definitions/TransportInfo.ImplSpecificInfo'
+  TransportTypes:
+    description: The enumeration TransportTypes represents types of transports
+    type: string
+    enum:
+      - REST_HTTP
+      - MB_TOPIC_BASED
+      - MB_ROUTING
+      - MB_PUBSUB
+      - RPC
+      - RPC_STREAMING
+      - WEBSOCKET
+    example: REST_HTTP

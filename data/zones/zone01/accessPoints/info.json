@@ -1,0 +1,48 @@
+{
+  "zoneId": "zone01",
+  "accessPoint": [
+    {
+      "accessPointId": "001010000000000000000000000000001",
+      "locationInfo": {
+        "latitude": 90.123,
+        "longitude": 80.123,
+        "altitude": 10.0,
+        "accuracy": 0
+      },
+      "connectionType": "Macro",
+      "operationStatus": "Serviceable",
+      "numberOfUsers": 5,
+      "interestRealm": "LA",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap001"
+    },
+    {
+      "accessPointId": "001010000000000000000000000000010",
+      "locationInfo": {
+        "latitude": 91.123,
+        "longitude": 81.123,
+        "altitude": 12.0,
+        "accuracy": 1
+      },
+      "connectionType": "Macro",
+      "operationStatus": "Unserviceable",
+      "numberOfUsers": 0,
+      "interestRealm": "DC",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap002"
+    },
+    {
+      "accessPointId": "001010000000000000000000000000011",
+      "locationInfo": {
+        "latitude": 93.123,
+        "longitude": 83.123,
+        "altitude": 16.0,
+        "accuracy": 3
+      },
+      "connectionType": "Macro",
+      "operationStatus": "Serviceable",
+      "numberOfUsers": 5,
+      "interestRealm": "NJ",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap003"
+    }
+  ],
+  "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints"
+}

@@ -1,0 +1,19 @@
+{
+  "zone": [
+    {
+      "zoneId": "zone01",
+      "numberOfAccessPoints": 3,
+      "numberOfUnserviceableAccessPoints": 1,
+      "numberOfUsers": 10,
+      "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone01"
+    },
+    {
+      "zoneId": "zone02",
+      "numberOfAccessPoints": 12,
+      "numberOfUnserviceableAccessPoints": 0,
+      "numberOfUsers": 36,
+      "resourceURL": "http://example.com/exampleAPI/location/v1/zones/zone02"
+    }
+  ],
+  "resourceURL": "http://example.com/exampleAPI/location/v1/zones"
+}

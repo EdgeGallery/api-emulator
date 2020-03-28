@@ -1,0 +1,31 @@
+[
+  {
+    "TransportInfo": {
+      "id": "TransId12345",
+      "name": "REST",
+      "description": "REST API",
+      "type": "REST_HTTP",
+      "protocol": "HTTP",
+      "version": "2.0",
+      "endpoint": {
+        "uris": [
+          "/meMp1/service/EntryPoint"
+        ],
+        "addresses": [
+          {
+            "host": "192.0.2.0",
+            "port": "8080"
+          }
+        ],
+        "alternative": {}
+      },
+      "security": {
+        "oAuth2Info": {
+          "grantTypes": "OAUTH2_CLIENT_CREDENTIALS",
+          "tokenEndpoint": "/meMp1/security/TokenEndPoint"
+        }
+      },
+      "implSpecificInfo": {}
+    }
+  }
+]

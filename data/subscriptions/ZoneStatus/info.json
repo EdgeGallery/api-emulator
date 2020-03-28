@@ -1,0 +1,25 @@
+{
+  "zoneStatusSubscription": [
+    {
+      "clientCorrelator": "0123",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123",
+      "callbackReference": {
+        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+      },
+      "zoneId": "zone01",
+      "numberOfUsersZoneThreshold": 500,
+      "operationStatus": ["Serviceable"]
+    },
+    {
+      "clientCorrelator": "0124",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription124",
+      "callbackReference": {
+        "notifyURL": "http://clientApp.example.com/location_notifications/123457"
+      },
+      "zoneId": "zone02",
+      "numberOfUsersAPThreshold": 50,
+      "operationStatus": ["Serviceable"]
+    }
+  ],
+  "resourceURL": "http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus"
+}

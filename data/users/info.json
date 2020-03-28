@@ -1,0 +1,55 @@
+{
+  "user": [
+    {
+      "address": "acr:192.0.2.1",
+      "accessPointId": "001010000000000000000000000000001",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.1",
+      "locationInfo": {
+        "latitude": 90.123,
+        "longitude": 80.123,
+        "altitude": 10.0,
+        "accuracy": 0
+      },
+      "contextLocationInfo": "GroundFloor"
+    },
+    {
+      "address": "acr:192.0.2.2",
+      "accessPointId": "001010000000000000000000000000001",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.2"
+    },
+    {
+      "address": "acr:192.0.2.3",
+      "accessPointId": "001010000000000000000000000000010",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.3"
+    },
+    {
+      "address": "acr:192.0.2.4",
+      "accessPointId": "001010000000000000000000000000001",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.4"
+    },
+    {
+      "address": "acr:192.0.2.5",
+      "accessPointId": "001010000000000000000000000000010",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.5"
+    },
+    {
+      "address": "acr:192.0.3.1",
+      "accessPointId": "001010000000000000000000000000001",
+      "zoneId": "zone01",
+      "resourceURL": "http://example.com/exampleAPI/location/v1/users/acr%3A192.0.3.1",
+      "locationInfo": {
+        "latitude": 114.07,
+        "longitude": 22.65,
+        "altitude": 80.0,
+        "accuracy": 0
+      },
+      "contextLocationInfo": "shenzhen"
+    }
+  ],
+  "resourceURL": "http://example.com/exampleAPI/location/v1/users"
+}

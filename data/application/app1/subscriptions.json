@@ -1,0 +1,17 @@
+{
+  "Mp1SubscriptionLinkList": {
+    "_links": {
+      "self": "/mep/mp1/v1/applications/app1/subscriptions",
+      "subscription": [
+        {
+          "href": "/mep/mp1/v1/applications/app1/subscriptions/AppTerminationNotificationSubscription/sub1",
+          "rel": "AppTerminationNotificationSubscription"
+        },
+        {
+          "href": "/mep/mp1/v1/applications/app1/subscriptions/SerAvailabilityNotificationSubscription/sub1",
+          "rel": "SerAvailabilityNotificationSubscription"
+        }
+      ]
+    }
+  }
+}

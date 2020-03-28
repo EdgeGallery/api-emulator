@@ -1,0 +1,3 @@
+src/main/java/org/mec/emulator/gen/impl/
+src/main/java/org/mec/emulator/gen/controller/FacerecognitionController.java
+src/main/java/org/mec/emulator/gen/delegate/FacerecognitionDelegate.java
