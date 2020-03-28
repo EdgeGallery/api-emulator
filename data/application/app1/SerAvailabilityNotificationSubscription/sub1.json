@@ -1,0 +1,50 @@
+{
+  "SerAvailabilityNotificationSubscription": {
+    "subscriptionType": "SerAvailabilityNotificationSubscription",
+    "callbackReference": "string",
+    "_links": {
+      "self": "/mep/mp1/v1/applications/app1/subscriptions/SerAvailabilityNotificationSubscription/sub1"
+    },
+    "filteringCriteria": {
+      "serInstanceId": "ServiceInstance123",
+      "serName": "ExampleService",
+      "serCategory": {
+        "href": "catItem1",
+        "id": "id12345",
+        "name": "RNI",
+        "version": "version1"
+      },
+      "version": "ServiceVersion1",
+      "state": "ACTIVE",
+      "transportId": "Rest1",
+      "transportInfo": {
+        "id": "TransId12345",
+        "name": "REST",
+        "description": "REST API",
+        "type": "REST_HTTP",
+        "protocol": "HTTP",
+        "version": "2.0",
+        "endpoint": {
+          "uris": [
+            "/meMp1/service/EntryPoint"
+          ],
+          "addresses": [
+            {
+              "host": "192.0.2.0",
+              "port": 8080
+            }
+          ],
+          "alternative": {}
+        },
+        "security": {
+          "oAuth2Info": {
+            "grantTypes": "OAUTH2_CLIENT_CREDENTIALS",
+            "tokenEndpoint": "/meMp1/security/TokenEndPoint"
+          }
+        },
+        "implSpecificInfo": {}
+      },
+      "serializer": "JSON"
+    }
+  }
+}

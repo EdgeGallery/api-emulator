@@ -1,0 +1,85 @@
+[
+    {
+    "ServiceInfo": {
+        "serInstanceId": "1577762821567585300",
+        "serName": "FaceRecognition",
+        "serCategory": {
+            "href": "catItem1",
+            "id": "FaceRecognitionInfo",
+            "name": "RNI",
+            "version": "version1"
+        },
+            "version": "ServiceVersion1",
+            "state": "ACTIVE",
+            "transportId": "Rest1",
+            "transportInfo": {
+                "id": "TransFaceRecognitionInfo",
+                "name": "REST",
+                "description": "REST API",
+                "type": "JSON",
+                "protocol": "HTTP",
+                "version": "2.0",
+                "endpoint": {
+                    "uris": [
+                        "/meMp1/service/EntryPoint"
+                    ],
+                    "addresses": [
+                        {
+                            "host": "159.138.5.41",
+                            "port": 32111
+                        }
+                    ]
+                },
+                "security": {
+                    "oAuth2Info": {
+                        "grantTypes": "OAUTH2_CLIENT_CREDENTIALS",
+                        "tokenEndpoint": "/meMp1/security/TokenEndPoint"
+                    }
+                }
+            },
+            "serializer": "JSON"
+        }
+    },
+	{
+    "ServiceInfo": {
+        "serInstanceId": "1577762443787369400",
+        "serName": "LocationService",
+        "serCategory": {
+            "href": "catItem1",
+            "id": "LocationInfo",
+            "name": "Location",
+            "version": "version1"
+        },
+            "version": "ServiceVersion1",
+            "state": "ACTIVE",
+            "transportId": "Rest1",
+            "transportInfo": {
+                "id": "TransLocationInfo",
+                "name": "REST",
+                "description": "REST API",
+                "type": "JSON",
+                "protocol": "HTTP",
+                "version": "2.0",
+                "endpoint": {
+                    "uris": [
+                        "/meMp1/service/EntryPoint"
+                    ],
+                    "addresses": [
+                        {
+                            "host": "159.138.5.41",
+                            "port": 32112
+                        }
+                    ]
+                },
+                "security": {
+                    "oAuth2Info": {
+                        "grantTypes": "OAUTH2_CLIENT_CREDENTIALS",
+                        "tokenEndpoint": "/meMp1/security/TokenEndPoint"
+                    }
+                }
+            },
+            "serializer": "JSON"
+        }
+    }
+	
+]

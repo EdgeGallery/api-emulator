@@ -1,0 +1,29 @@
+metadata:
+  name: api-emulator
+  labels:
+    app: api-emulator
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - image: 159.138.11.6:8089/api-emulator:latest
+    imagePullPolicy: Always
+    name: api-emulator
+    ports:
+    - containerPort: 8089
+---
+metadata:
+  name: api-emulator
+  labels:
+    app: api-emulator
+apiVersion: v1
+kind: Service
+spec:
+  selector:
+    app: api-emulator
+  type: NodePort
+  ports:
+  - port: 8089
+    name: api-emulator
+    targetPort: 8089
+    nodePort: 30089

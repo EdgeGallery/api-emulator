@@ -1,0 +1,10 @@
+{
+  "AppTerminationNotificationSubscription": {
+    "subscriptionType": "AppTerminationNotificationSubscription",
+    "callbackReference": "string",
+    "_links": {
+      "self": "/mep/mp1/v1/applications/app1/subscriptions/AppTerminationNotificationSubscription/sub1"
+    },
+    "appInstanceId": "ID1"
+  }
+}

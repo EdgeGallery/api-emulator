@@ -1,0 +1,25 @@
+{
+    "zonalTrafficSubscription": [
+        {
+            "clientCorrelator": "0123",
+            "resourceURL": "http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123",
+            "callbackReference": {
+                "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+            },
+            "zoneId": "zone01",
+            "interestRealm": ["LA"],
+            "userEventCriteria": ["Transferring"]
+        },
+        {
+            "clientCorrelator": "0124",
+            "resourceURL": "http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription124",
+            "callbackReference": {
+                "notifyURL": "http://clientApp.example.com/location_notifications/123457"
+            },
+            "zoneId": "zone02",
+            "interestRealm": ["LA"],
+            "userEventCriteria": ["Transferring"]
+        }
+    ],
+    "resourceURL": "http://example.com/exampleAPI/location/v1/zonalTraffic"
+}
