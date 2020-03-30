@@ -1,18 +1,37 @@
+/*
+ *   Copyright 2020 Huawei Technologies Co., Ltd.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ */
+
 package org.mec.emulator.gen.controller;
 
 import io.swagger.annotations.ApiParam;
-import org.mec.emulator.gen.model.Body;
-import org.mec.emulator.gen.delegate.FacerecognitionDelegate;
-
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.mec.emulator.gen.delegate.FacerecognitionDelegate;
+import org.mec.emulator.gen.model.Body;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.CseSpringBootProviderCodegen", date = "2020-02-21T16:25:53.995+08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.CseSpringBootProviderCodegen", date = "2020-02" +
+    "-21T16:25:53.995+08:00")
 
 @RestSchema(schemaId = "facerecognition")
 @RequestMapping(path = "/v1/face-recognition")
@@ -23,48 +42,48 @@ public class FacerecognitionController {
 
     @RequestMapping(value = "/",
         method = RequestMethod.GET)
-    @ApiResponses({
+    @ApiResponses( {
         @ApiResponse(code = 200, response = String.class, message = "OK")
-        })
-    public String healthCheck(){
+    })
+    public String healthCheck() {
 
         return userFacerecognitionDelegate.healthCheck();
     }
 
 
     @RequestMapping(value = "/recognition",
-        produces = { "application/json" }, 
-        consumes = { "multipart/form-data" },
+        produces = {"application/json"},
+        consumes = {"multipart/form-data"},
         method = RequestMethod.POST)
-    @ApiResponses({
+    @ApiResponses( {
         @ApiResponse(code = 200, response = String.class, message = "OK")
-        })
-    public String recognize( @RequestPart(value="file", required=false) MultipartFile file){
+    })
+    public String recognize(@RequestPart(value = "file", required = false) MultipartFile file) {
 
         return userFacerecognitionDelegate.recognize(file);
     }
 
 
     @RequestMapping(value = "/upload",
-        produces = { "application/json" },
+        produces = {"application/json"},
         method = RequestMethod.POST)
-    @ApiResponses({
+    @ApiResponses( {
         @ApiResponse(code = 200, response = String.class, message = "ok")
-        })
-    public String uploadImage(@ApiParam(value = "file") @RequestPart(value="file", required=false) MultipartFile file){
+    })
+    public String uploadImage(@ApiParam(value = "file") @RequestPart(value = "file", required = false) MultipartFile file) {
 
         return userFacerecognitionDelegate.uploadImage(file);
     }
 
 
     @RequestMapping(value = "/video",
-        produces = { "application/xml", "application/json" }, 
-        consumes = { "application/json", "application/xml" },
+        produces = {"application/xml", "application/json"},
+        consumes = {"application/json", "application/xml"},
         method = RequestMethod.POST)
-    @ApiResponses({
+    @ApiResponses( {
         @ApiResponse(code = 200, response = String.class, message = "OK")
-        })
-    public String video( @RequestBody Body body){
+    })
+    public String video(@RequestBody Body body) {
 
         return userFacerecognitionDelegate.video(body);
     }
