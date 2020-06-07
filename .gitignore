@@ -8,14 +8,5 @@ target/
 *.iml
 *.ipr
 
-
-### Generated files ###
-/src/main/java/org/mec/emulator/gen/controller/*
-/src/main/java/org/mec/emulator/gen/delegate/*
-/src/main/java/org/mec/emulator/gen/model/*
-
 ### log files ###
 *.log
-### unignore files ###
-!/src/main/java/org/mec/emulator/gen/controller/FacerecognitionController.java
-!/src/main/java/org/mec/emulator/gen/delegate/FacerecognitionDelegate.java
