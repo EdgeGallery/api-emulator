@@ -18,13 +18,10 @@
 package org.mec.emulator.controller;
 
 import io.swagger.annotations.ApiParam;
-import java.io.IOException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.mec.emulator.api.UsersApi;
 import org.mec.emulator.service.UsersApiService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UsersApiController implements UsersApi {
-
-    private static final Logger log = LoggerFactory.getLogger(UsersApiController.class);
 
     @Autowired
     private UsersApiService usersApiService;

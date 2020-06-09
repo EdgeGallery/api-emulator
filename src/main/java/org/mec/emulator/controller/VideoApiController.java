@@ -22,8 +22,6 @@ import javax.validation.Valid;
 import org.mec.emulator.api.VideoApi;
 import org.mec.emulator.model.Body;
 import org.mec.emulator.service.VideoApiService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +32,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class VideoApiController implements VideoApi {
-
-    private static final Logger log = LoggerFactory.getLogger(VideoApiController.class);
 
     @Autowired
     private VideoApiService videoApiService;

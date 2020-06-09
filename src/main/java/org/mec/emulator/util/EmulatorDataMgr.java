@@ -45,7 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class EmulatorDataMgr implements ApplicationRunner {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(EmulatorDataMgr.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmulatorDataMgr.class);
 
     private static String name = null;
 
@@ -178,9 +178,8 @@ public class EmulatorDataMgr implements ApplicationRunner {
             if (name == null) {
                 return "Face information does not exist";
             } else {
-                String recognitionResult = "{" + "  Face position:" + "  {" + "  bottom: 562," + "  left: 419,"
+                return "{" + "  Face position:" + "  {" + "  bottom: 562," + "  left: 419,"
                     + "  right: 740," + "  top: 241" + " }," + "  Name " + name + "}";
-                return recognitionResult;
 
             }
         }
@@ -193,8 +192,7 @@ public class EmulatorDataMgr implements ApplicationRunner {
         } else {
             String originalFilename = file.getOriginalFilename();
             name = originalFilename.substring(0, originalFilename.indexOf("."));
-            String uploadValue = "{ Face number: 1, Result: upload success }";
-            return uploadValue;
+            return "{ Face number: 1, Result: upload success }";
         }
 
     }
