@@ -49,19 +49,23 @@ public class EmulatorDataMgr implements ApplicationRunner {
 
     private static String name = null;
 
-    private static final String USER_DATA_FILE_NAME = "./data/users/info.json";
+    private static final String USER_DATA_FILE_NAME = "." + File.separator + "data" + File.separator + "users"
+        + File.separator + "info.json";
 
-    private static final String FACE_DATA_FILE_NAME = "./data/face_recognition/recognition.json";
+    private static final String ZONAL_TRAFFIC_SUB_DATA_FILE_NAME = "." + File.separator + "data" + "" + File.separator
+        + "subscriptions" + File.separator + "ZonalTraffic" + File.separator + "info.json";
 
-    private static final String ZONAL_TRAFFIC_SUB_DATA_FILE_NAME = "./data" + "/subscriptions/ZonalTraffic/info.json";
+    private static final String ZONE_STATUS_SUB_DATA_FILE_NAME = "." + File.separator + "data" + "" + File.separator
+        + "subscriptions" + File.separator + "ZoneStatus" + File.separator + "info.json";
 
-    private static final String ZONE_STATUS_SUB_DATA_FILE_NAME = "./data" + "/subscriptions/ZoneStatus/info.json";
+    private static final String ZONE_ACCESS_POINTS_DATA_FILE_NAME_PREFIX = "." + File.separator + "data" + ""
+        + File.separator + "zones" + File.separator + "";
 
-    private static final String ZONE_ACCESS_POINTS_DATA_FILE_NAME_PREFIX = "./data" + "/zones/";
+    private static final String ZONE_ACCESS_POINTS_DATA_FILE_NAME_SUFFIX = "" + File.separator + "accessPoints"
+        + File.separator + "info.json";
 
-    private static final String ZONE_ACCESS_POINTS_DATA_FILE_NAME_SUFFIX = "/accessPoints/info.json";
-
-    private static final String ZONE_DATA_FILE_NAME = "./data/zones/info.json";
+    private static final String ZONE_DATA_FILE_NAME = "." + File.separator + "data" + File.separator + "zones"
+        + File.separator + "info.json";
 
     private static String userResourceURL = null;
 
@@ -203,35 +207,18 @@ public class EmulatorDataMgr implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        initData();
+        initUserData();
+
+        initZonalTrafficSubData();
+
+        initZoneStatusSubscriptionData();
+
+        initZoneData();
+
+        LOGGER.info("Succeed to load json data");
     }
 
-    private void initData() throws IOException {
-
-        // load user data
-        UserList userListData = new ObjectMapper().readValue(new File(USER_DATA_FILE_NAME), UserList.class);
-        userListData.getUser().forEach(userInfo -> {
-            userIdToUserInfoMap.put(userInfo.getAddress(), userInfo);
-        });
-        userResourceURL = userListData.getResourceURL();
-
-        // load zonalTrafficSub data
-        InlineResponse200NotificationSubscriptionList zonalTrafficSubData = new ObjectMapper()
-            .readValue(new File(ZONAL_TRAFFIC_SUB_DATA_FILE_NAME), InlineResponse200NotificationSubscriptionList.class);
-        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription -> {
-            subIdToZonalTrafficSubMap.put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription);
-        });
-        zonalTrafficSubResourceURL = zonalTrafficSubData.getResourceURL();
-
-        // load zoneStatusSubscription data
-        InlineResponse2001NotificationSubscriptionList zoneStatusSubscriptionData = new ObjectMapper()
-            .readValue(new File(ZONE_STATUS_SUB_DATA_FILE_NAME), InlineResponse2001NotificationSubscriptionList.class);
-        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription -> {
-            subIdToZoneStatusSubMap.put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription);
-        });
-        zoneStatusSubResourceURL = zoneStatusSubscriptionData.getResourceURL();
-
-        // load zone data
+    private void initZoneData() throws IOException {
         ZoneList zoneList = new ObjectMapper().readValue(new File(ZONE_DATA_FILE_NAME), ZoneList.class);
         for (ZoneInfo zoneInfo : zoneList.getZone()) {
             String zoneId = zoneInfo.getZoneId();
@@ -249,6 +236,31 @@ public class EmulatorDataMgr implements ApplicationRunner {
             zoneIdToAccessPointResourceURL.put(zoneId, accessPointList.getResourceURL());
         }
         zoneResourceURL = zoneList.getResourceURL();
-        LOGGER.info("Succeed to load json data");
+    }
+
+    private void initZoneStatusSubscriptionData() throws IOException {
+        InlineResponse2001NotificationSubscriptionList zoneStatusSubscriptionData = new ObjectMapper()
+            .readValue(new File(ZONE_STATUS_SUB_DATA_FILE_NAME), InlineResponse2001NotificationSubscriptionList.class);
+        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription -> {
+            subIdToZoneStatusSubMap.put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription);
+        });
+        zoneStatusSubResourceURL = zoneStatusSubscriptionData.getResourceURL();
+    }
+
+    private void initZonalTrafficSubData() throws IOException {
+        InlineResponse200NotificationSubscriptionList zonalTrafficSubData = new ObjectMapper()
+            .readValue(new File(ZONAL_TRAFFIC_SUB_DATA_FILE_NAME), InlineResponse200NotificationSubscriptionList.class);
+        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription -> {
+            subIdToZonalTrafficSubMap.put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription);
+        });
+        zonalTrafficSubResourceURL = zonalTrafficSubData.getResourceURL();
+    }
+
+    private void initUserData() throws IOException {
+        UserList userListData = new ObjectMapper().readValue(new File(USER_DATA_FILE_NAME), UserList.class);
+        userListData.getUser().forEach(userInfo -> {
+            userIdToUserInfoMap.put(userInfo.getAddress(), userInfo);
+        });
+        userResourceURL = userListData.getResourceURL();
     }
 }
