@@ -15,19 +15,19 @@
  *
  */
 
-package org.mec.emulator.gen.delegate;
+package org.mec.emulator.service;
 
-import org.mec.emulator.gen.model.Body;
+import org.mec.emulator.util.EmulatorDataMgr;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
+public class UploadApiService {
 
-public interface FacerecognitionDelegate {
-
-    String healthCheck();
-
-    String recognize( MultipartFile file);
-
-    String uploadImage( MultipartFile file);
-
-    String video(Body body);
+    public ResponseEntity<String> uploadImage(MultipartFile file) {
+        String uploadInfo = EmulatorDataMgr.getUploadInfo(file);
+        return new ResponseEntity<>(uploadInfo, HttpStatus.OK);
+    }
 }
