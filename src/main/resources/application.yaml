@@ -20,8 +20,8 @@ server:
   port: 8089
   address: ${LISTEN_IP:0.0.0.0}
   ssl:
-    enabled: ${SSL_ENABLED:false}
-    key-store: ${SSL_KEY_STORE_PATH:}
-    key-store-password: ${SSL_KEY_STORE_PASSWORD:}
-    key-store-type: ${SSL_KEY_STORE_TYPE:}
-    key-alias: ${SSL_KEY_ALIAS:}
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: te9Fmv%qaq
+    key-store-type: PKCS12
+    key-alias: edgegallery
