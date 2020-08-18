@@ -191,6 +191,9 @@ public class EmulatorDataMgr implements ApplicationRunner {
             return "images upload fail";
         } else {
             String originalFilename = file.getOriginalFilename();
+            if (originalFilename == null) {
+                return "file does not exist, please upload file";
+            }
             name = originalFilename.substring(0, originalFilename.indexOf("."));
             return "{ Face number: 1, Result: upload success }";
         }
