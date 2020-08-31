@@ -68,29 +68,44 @@ public class UserList {
         return user;
     }
 
-    public void setUser(List<UserInfo> user) {
-        this.user = user;
-    }
-
     public UserList resourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
         return this;
     }
 
+    public void setUser(List<UserInfo> user) {
+        this.user = user;
+    }
+
     /**
-     * Get resourceURL
+     * 获取资源列表
      *
-     * @return resourceURL
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
+
+    public void setResourceURL(String resourceURL) {
+        this.resourceURL = resourceURL;
+    }
 
     public String getResourceURL() {
         return resourceURL;
     }
 
-    public void setResourceURL(String resourceURL) {
-        this.resourceURL = resourceURL;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class UserList {\n");
+
+        sb.append("    user: ").append(toIndentedString(user)).append("\n");
+        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, resourceURL);
     }
 
     @Override
@@ -103,22 +118,6 @@ public class UserList {
         }
         UserList userList = (UserList) o;
         return Objects.equals(this.user, userList.user) && Objects.equals(this.resourceURL, userList.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(user, resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UserList {\n");
-
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
     }
 
     /**

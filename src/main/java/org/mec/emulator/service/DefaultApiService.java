@@ -17,12 +17,7 @@
 
 package org.mec.emulator.service;
 
-import org.mec.emulator.api.DefaultApi;
 import org.mec.emulator.util.EmulatorDataMgr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:02:00.259Z")
