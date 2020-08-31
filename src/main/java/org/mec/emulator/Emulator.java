@@ -34,13 +34,15 @@ public class Emulator {
         TrustManager[] trustAllCerts = new TrustManager[] {
             new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    return new X509Certificate[0];
                 }
 
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                    // Do nothing.
+                }
+
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    // Do nothing.
                 }
             }
         };

@@ -94,14 +94,14 @@ public class ZoneList {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        ZoneList zoneList = (ZoneList) o;
+        ZoneList zoneList = (ZoneList) object;
         return Objects.equals(this.zone, zoneList.zone) && Objects.equals(this.resourceURL, zoneList.resourceURL);
     }
 
