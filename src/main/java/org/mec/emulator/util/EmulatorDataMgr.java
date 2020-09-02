@@ -49,6 +49,8 @@ public class EmulatorDataMgr implements ApplicationRunner {
 
     private static final String INFO_JSON = "info.json";
 
+    private static final String HEATH_CHECK = "The emulator has started";
+
     private static String name = null;
 
     private static final String USER_DATA_FILE_NAME = "." + File.separator + "data" + File.separator + "users"
@@ -169,8 +171,7 @@ public class EmulatorDataMgr implements ApplicationRunner {
     }
 
     public static String getHealthCheck() {
-        String healthCheck = "OK";
-        return healthCheck;
+        return HEATH_CHECK;
     }
 
     public static String getFaceRecognitionInfo(MultipartFile file) {
@@ -247,18 +248,18 @@ public class EmulatorDataMgr implements ApplicationRunner {
     private void initZoneStatusSubscriptionData() throws IOException {
         InlineResponse2001NotificationSubscriptionList zoneStatusSubscriptionData = new ObjectMapper()
             .readValue(new File(ZONE_STATUS_SUB_DATA_FILE_NAME), InlineResponse2001NotificationSubscriptionList.class);
-        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription -> {
-            subIdToZoneStatusSubMap.put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription);
-        });
+        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription ->
+            subIdToZoneStatusSubMap.put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription)
+        );
         zoneStatusSubResourceURL = zoneStatusSubscriptionData.getResourceURL();
     }
 
     private void initZonalTrafficSubData() throws IOException {
         InlineResponse200NotificationSubscriptionList zonalTrafficSubData = new ObjectMapper()
             .readValue(new File(ZONAL_TRAFFIC_SUB_DATA_FILE_NAME), InlineResponse200NotificationSubscriptionList.class);
-        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription -> {
-            subIdToZonalTrafficSubMap.put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription);
-        });
+        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription ->
+            subIdToZonalTrafficSubMap.put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription)
+        );
         zonalTrafficSubResourceURL = zonalTrafficSubData.getResourceURL();
     }
 
