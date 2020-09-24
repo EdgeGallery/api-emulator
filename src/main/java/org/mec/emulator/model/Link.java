@@ -81,6 +81,11 @@ public class Link {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(rel, href);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -90,11 +95,6 @@ public class Link {
         }
         Link link = (Link) o;
         return Objects.equals(this.rel, link.rel) && Objects.equals(this.href, link.href);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(rel, href);
     }
 
     @Override

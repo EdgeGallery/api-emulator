@@ -25,8 +25,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -88,26 +86,5 @@ public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered 
         if (responseWrapper != null) {
             responseWrapper.copyBodyToResponse();
         }
-    }
-
-    @Setter
-    @Getter
-    private static class HttpRequestTraceLog {
-        private String accessId;
-        private String path;
-        private String userId;
-        private String parameterMap;
-        private String method;
-        private String time;
-        private String requestBody;
-    }
-
-    @Setter
-    @Getter
-    private static class HttpResponseTraceLog {
-        private String accessId;
-        private Integer status;
-        private String time;
-        private String body;
     }
 }

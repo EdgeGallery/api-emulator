@@ -237,6 +237,13 @@ public class ZoneStatusNotification {
     }
 
     @Override
+    public int hashCode() {
+        return Objects
+            .hash(callbackData, zoneId, accessPointId, numberOfUsersInZone, numberOfUsersInAP, operationStatus,
+                timestamp, link);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -253,13 +260,6 @@ public class ZoneStatusNotification {
             .equals(this.operationStatus, zoneStatusNotification.operationStatus) && Objects
             .equals(this.timestamp, zoneStatusNotification.timestamp) && Objects
             .equals(this.link, zoneStatusNotification.link);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(callbackData, zoneId, accessPointId, numberOfUsersInZone, numberOfUsersInAP, operationStatus,
-                timestamp, link);
     }
 
     @Override

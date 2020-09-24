@@ -128,6 +128,11 @@ public class LocationInfo {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(latitude, longitude, altitude, accuracy);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -139,11 +144,6 @@ public class LocationInfo {
         return Objects.equals(this.latitude, locationInfo.latitude) && Objects
             .equals(this.longitude, locationInfo.longitude) && Objects.equals(this.altitude, locationInfo.altitude)
             && Objects.equals(this.accuracy, locationInfo.accuracy);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(latitude, longitude, altitude, accuracy);
     }
 
     @Override

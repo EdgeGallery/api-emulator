@@ -27,7 +27,6 @@ import org.springframework.validation.annotation.Validated;
 
 /**
  * 接入点信息的类型定义
- *
  */
 @ApiModel(description = "接入点信息的类型定义")
 @Validated
@@ -230,6 +229,13 @@ public class AccessPointInfo {
     }
 
     @Override
+    public int hashCode() {
+        return Objects
+            .hash(accessPointId, locationInfo, connectionType, operationStatus, numberOfUsers, timezone, interestRealm,
+                resourceURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -249,17 +255,9 @@ public class AccessPointInfo {
     }
 
     @Override
-    public int hashCode() {
-        return Objects
-            .hash(accessPointId, locationInfo, connectionType, operationStatus, numberOfUsers, timezone, interestRealm,
-                resourceURL);
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class AccessPointInfo {\n");
-
         sb.append("    accessPointId: ").append(toIndentedString(accessPointId)).append("\n");
         sb.append("    locationInfo: ").append(toIndentedString(locationInfo)).append("\n");
         sb.append("    connectionType: ").append(toIndentedString(connectionType)).append("\n");

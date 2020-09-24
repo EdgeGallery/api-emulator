@@ -94,6 +94,11 @@ public class ZoneList {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(zone, resourceURL);
+    }
+
+    @Override
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -103,11 +108,6 @@ public class ZoneList {
         }
         ZoneList zoneList = (ZoneList) object;
         return Objects.equals(this.zone, zoneList.zone) && Objects.equals(this.resourceURL, zoneList.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(zone, resourceURL);
     }
 
     @Override

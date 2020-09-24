@@ -118,6 +118,11 @@ public class AccessPointList {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(zoneId, accessPoint, resourceURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -129,11 +134,6 @@ public class AccessPointList {
         return Objects.equals(this.zoneId, accessPointList.zoneId) && Objects
             .equals(this.accessPoint, accessPointList.accessPoint) && Objects
             .equals(this.resourceURL, accessPointList.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(zoneId, accessPoint, resourceURL);
     }
 
     @Override

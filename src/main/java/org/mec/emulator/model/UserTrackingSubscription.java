@@ -155,6 +155,11 @@ public class UserTrackingSubscription {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(clientCorrelator, callbackReference, address, userEventCriteria, resourceURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -168,11 +173,6 @@ public class UserTrackingSubscription {
             .equals(this.address, userTrackingSubscription.address) && Objects
             .equals(this.userEventCriteria, userTrackingSubscription.userEventCriteria) && Objects
             .equals(this.resourceURL, userTrackingSubscription.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientCorrelator, callbackReference, address, userEventCriteria, resourceURL);
     }
 
     @Override

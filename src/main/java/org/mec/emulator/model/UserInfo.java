@@ -66,7 +66,6 @@ public class UserInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public String getAddress() {
         return address;
     }
@@ -87,7 +86,6 @@ public class UserInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public String getAccessPointId() {
         return accessPointId;
     }
@@ -108,7 +106,6 @@ public class UserInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public String getZoneId() {
         return zoneId;
     }
@@ -191,13 +188,18 @@ public class UserInfo {
      * @return ancillaryInfo
      **/
     @ApiModelProperty(value = "")
-
     public String getAncillaryInfo() {
         return ancillaryInfo;
     }
 
     public void setAncillaryInfo(String ancillaryInfo) {
         this.ancillaryInfo = ancillaryInfo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(address, accessPointId, zoneId, resourceURL, locationInfo, contextLocationInfo, ancillaryInfo);
     }
 
     @Override
@@ -218,16 +220,9 @@ public class UserInfo {
     }
 
     @Override
-    public int hashCode() {
-        return Objects
-            .hash(address, accessPointId, zoneId, resourceURL, locationInfo, contextLocationInfo, ancillaryInfo);
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UserInfo {\n");
-
         sb.append("    address: ").append(toIndentedString(address)).append("\n");
         sb.append("    accessPointId: ").append(toIndentedString(accessPointId)).append("\n");
         sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");

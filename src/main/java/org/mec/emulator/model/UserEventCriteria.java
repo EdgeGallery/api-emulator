@@ -28,7 +28,6 @@ import org.springframework.validation.annotation.Validated;
 @ApiModel(description = "用于生成通知的用户事件值列表（这些适用于指定的地址）。如果缺少此元素，则会要求为用户事件中的任何更改生成通知。")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:11:06.510Z")
-
 public class UserEventCriteria extends ArrayList<UserEventType> {
 
     @Override

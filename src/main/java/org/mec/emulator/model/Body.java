@@ -27,7 +27,6 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:02:00.259Z")
-
 public class Body {
     @JsonProperty("url")
     private String url = null;
@@ -53,6 +52,11 @@ public class Body {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(url);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -62,11 +66,6 @@ public class Body {
         }
         Body body = (Body) o;
         return Objects.equals(this.url, body.url);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(url);
     }
 
     @Override

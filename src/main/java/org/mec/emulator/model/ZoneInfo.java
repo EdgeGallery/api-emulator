@@ -30,7 +30,6 @@ import org.springframework.validation.annotation.Validated;
 @ApiModel(description = "区域信息")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:11:06.510Z")
-
 public class ZoneInfo {
     @JsonProperty("zoneId")
     private String zoneId = null;
@@ -59,7 +58,6 @@ public class ZoneInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public String getZoneId() {
         return zoneId;
     }
@@ -80,7 +78,6 @@ public class ZoneInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public Integer getNumberOfAccessPoints() {
         return numberOfAccessPoints;
     }
@@ -101,7 +98,6 @@ public class ZoneInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public Integer getNumberOfUnserviceableAccessPoints() {
         return numberOfUnserviceableAccessPoints;
     }
@@ -122,7 +118,6 @@ public class ZoneInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public Integer getNumberOfUsers() {
         return numberOfUsers;
     }
@@ -143,13 +138,18 @@ public class ZoneInfo {
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull
-
     public String getResourceURL() {
         return resourceURL;
     }
 
     public void setResourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(zoneId, numberOfAccessPoints, numberOfUnserviceableAccessPoints, numberOfUsers, resourceURL);
     }
 
     @Override
@@ -166,12 +166,6 @@ public class ZoneInfo {
             .equals(this.numberOfUnserviceableAccessPoints, zoneInfo.numberOfUnserviceableAccessPoints) && Objects
             .equals(this.numberOfUsers, zoneInfo.numberOfUsers) && Objects
             .equals(this.resourceURL, zoneInfo.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(zoneId, numberOfAccessPoints, numberOfUnserviceableAccessPoints, numberOfUsers, resourceURL);
     }
 
     @Override

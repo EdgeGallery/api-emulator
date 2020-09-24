@@ -27,6 +27,7 @@ public class RequestFilterConfiguration {
 
     /**
      * Register log filter.
+     *
      * @return
      */
     @Bean
