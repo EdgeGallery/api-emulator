@@ -37,12 +37,6 @@ public enum OperationStatus {
         this.value = value;
     }
 
-    @Override
-    @JsonValue
-    public String toString() {
-        return String.valueOf(value);
-    }
-
     @JsonCreator
     public static OperationStatus fromValue(String text) {
         for (OperationStatus b : OperationStatus.values()) {
@@ -51,6 +45,12 @@ public enum OperationStatus {
             }
         }
         return null;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+        return String.valueOf(value);
     }
 }
 

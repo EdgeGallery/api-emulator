@@ -92,6 +92,11 @@ public class InlineResponse2001NotificationSubscriptionList {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(zoneStatusSubscription, resourceURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -104,11 +109,6 @@ public class InlineResponse2001NotificationSubscriptionList {
         return Objects
             .equals(this.zoneStatusSubscription, inlineResponse2001NotificationSubscriptionList.zoneStatusSubscription)
             && Objects.equals(this.resourceURL, inlineResponse2001NotificationSubscriptionList.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(zoneStatusSubscription, resourceURL);
     }
 
     @Override

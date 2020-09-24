@@ -30,7 +30,6 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:11:06.510Z")
-
 public class InlineResponse200NotificationSubscriptionList {
     @JsonProperty("zonalTrafficSubscription")
     @Valid
@@ -92,6 +91,11 @@ public class InlineResponse200NotificationSubscriptionList {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(zonalTrafficSubscription, resourceURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -104,11 +108,6 @@ public class InlineResponse200NotificationSubscriptionList {
         return Objects.equals(this.zonalTrafficSubscription,
             inlineResponse200NotificationSubscriptionList.zonalTrafficSubscription) && Objects
             .equals(this.resourceURL, inlineResponse200NotificationSubscriptionList.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(zonalTrafficSubscription, resourceURL);
     }
 
     @Override

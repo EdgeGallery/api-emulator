@@ -45,9 +45,7 @@ public class InlineResponse2001 {
      * @return notificationSubscriptionList
      **/
     @ApiModelProperty(value = "")
-
     @Valid
-
     public InlineResponse2001NotificationSubscriptionList getNotificationSubscriptionList() {
         return notificationSubscriptionList;
     }
@@ -55,6 +53,11 @@ public class InlineResponse2001 {
     public void setNotificationSubscriptionList(
         InlineResponse2001NotificationSubscriptionList notificationSubscriptionList) {
         this.notificationSubscriptionList = notificationSubscriptionList;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(notificationSubscriptionList);
     }
 
     @Override
@@ -67,11 +70,6 @@ public class InlineResponse2001 {
         }
         InlineResponse2001 inlineResponse2001 = (InlineResponse2001) o;
         return Objects.equals(this.notificationSubscriptionList, inlineResponse2001.notificationSubscriptionList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(notificationSubscriptionList);
     }
 
     @Override

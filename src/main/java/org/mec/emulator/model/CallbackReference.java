@@ -30,7 +30,6 @@ import org.springframework.validation.annotation.Validated;
 @ApiModel(description = "Notification callback definition.")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:11:06.510Z")
-
 public class CallbackReference {
     @JsonProperty("notifyURL")
     private String notifyURL = null;
@@ -57,6 +56,11 @@ public class CallbackReference {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(notifyURL);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -66,11 +70,6 @@ public class CallbackReference {
         }
         CallbackReference callbackReference = (CallbackReference) o;
         return Objects.equals(this.notifyURL, callbackReference.notifyURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(notifyURL);
     }
 
     @Override

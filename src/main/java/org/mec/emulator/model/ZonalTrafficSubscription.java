@@ -33,7 +33,6 @@ import org.springframework.validation.annotation.Validated;
 @ApiModel(description = "区域跟踪订阅")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-06-05T02:11:06.510Z")
-
 public class ZonalTrafficSubscription {
     @JsonProperty("clientCorrelator")
     private String clientCorrelator = null;
@@ -171,9 +170,7 @@ public class ZonalTrafficSubscription {
      **/
     @ApiModelProperty(
         value = "List of user event values to generate notifications for (these apply to zone identifier or all interest realms within zone identifier specified). If this element is missing, a notification is requested to be generated for any change in user event.")
-
     @Valid
-
     public List<UserEventType> getUserEventCriteria() {
         return userEventCriteria;
     }
@@ -193,7 +190,6 @@ public class ZonalTrafficSubscription {
      * @return duration
      **/
     @ApiModelProperty(value = "")
-
     public String getDuration() {
         return duration;
     }
@@ -213,13 +209,18 @@ public class ZonalTrafficSubscription {
      * @return resourceURL
      **/
     @ApiModelProperty(value = "")
-
     public String getResourceURL() {
         return resourceURL;
     }
 
     public void setResourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+            .hash(clientCorrelator, callbackReference, zoneId, interestRealm, userEventCriteria, duration, resourceURL);
     }
 
     @Override
@@ -238,12 +239,6 @@ public class ZonalTrafficSubscription {
             .equals(this.userEventCriteria, zonalTrafficSubscription.userEventCriteria) && Objects
             .equals(this.duration, zonalTrafficSubscription.duration) && Objects
             .equals(this.resourceURL, zonalTrafficSubscription.resourceURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(clientCorrelator, callbackReference, zoneId, interestRealm, userEventCriteria, duration, resourceURL);
     }
 
     @Override

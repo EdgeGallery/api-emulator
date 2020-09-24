@@ -51,12 +51,6 @@ public enum ConnectionType {
         this.value = value;
     }
 
-    @Override
-    @JsonValue
-    public String toString() {
-        return String.valueOf(value);
-    }
-
     @JsonCreator
     public static ConnectionType fromValue(String text) {
         for (ConnectionType b : ConnectionType.values()) {
@@ -65,6 +59,12 @@ public enum ConnectionType {
             }
         }
         return null;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+        return String.valueOf(value);
     }
 }
 

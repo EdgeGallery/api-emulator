@@ -213,6 +213,12 @@ public class ZoneStatusSubscription {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(clientCorrelator, resourceURL, callbackReference, zoneId, numberOfUsersZoneThreshold,
+            numberOfUsersAPThreshold, operationStatus);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -228,12 +234,6 @@ public class ZoneStatusSubscription {
             .equals(this.numberOfUsersZoneThreshold, zoneStatusSubscription.numberOfUsersZoneThreshold) && Objects
             .equals(this.numberOfUsersAPThreshold, zoneStatusSubscription.numberOfUsersAPThreshold) && Objects
             .equals(this.operationStatus, zoneStatusSubscription.operationStatus);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientCorrelator, resourceURL, callbackReference, zoneId, numberOfUsersZoneThreshold,
-            numberOfUsersAPThreshold, operationStatus);
     }
 
     @Override

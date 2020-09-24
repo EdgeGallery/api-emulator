@@ -33,16 +33,16 @@ public class Emulator {
         // do not check host name
         TrustManager[] trustAllCerts = new TrustManager[] {
             new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    // Do nothing.
                 }
 
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
                     // Do nothing.
                 }
 
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    // Do nothing.
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
                 }
             }
         };

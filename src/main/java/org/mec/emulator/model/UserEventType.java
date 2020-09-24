@@ -37,12 +37,6 @@ public enum UserEventType {
         this.value = value;
     }
 
-    @Override
-    @JsonValue
-    public String toString() {
-        return String.valueOf(value);
-    }
-
     @JsonCreator
     public static UserEventType fromValue(String text) {
         for (UserEventType b : UserEventType.values()) {
@@ -51,6 +45,12 @@ public enum UserEventType {
             }
         }
         return null;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+        return String.valueOf(value);
     }
 }
 

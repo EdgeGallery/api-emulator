@@ -68,39 +68,27 @@ public class UserList {
         return user;
     }
 
-    public UserList resourceURL(String resourceURL) {
-        this.resourceURL = resourceURL;
-        return this;
-    }
-
     public void setUser(List<UserInfo> user) {
         this.user = user;
     }
 
-    /**
-     * 获取资源列表
-     *
-     **/
-    @ApiModelProperty(required = true, value = "")
-    @NotNull
-
-    public void setResourceURL(String resourceURL) {
+    public UserList resourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
+        return this;
     }
 
     public String getResourceURL() {
         return resourceURL;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UserList {\n");
+    /**
+     * 获取资源列表
+     **/
+    @ApiModelProperty(required = true, value = "")
+    @NotNull
 
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
+    public void setResourceURL(String resourceURL) {
+        this.resourceURL = resourceURL;
     }
 
     @Override
@@ -118,6 +106,17 @@ public class UserList {
         }
         UserList userList = (UserList) o;
         return Objects.equals(this.user, userList.user) && Objects.equals(this.resourceURL, userList.resourceURL);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("class UserList {\n");
+
+        sb.append("    user: ").append(toIndentedString(user)).append("\n");
+        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
 
     /**

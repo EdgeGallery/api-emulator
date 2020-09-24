@@ -51,8 +51,6 @@ public class EmulatorDataMgr implements ApplicationRunner {
 
     private static final String HEATH_CHECK = "The emulator has started";
 
-    private static String name = null;
-
     private static final String USER_DATA_FILE_NAME = "." + File.separator + "data" + File.separator + "users"
         + File.separator + INFO_JSON;
 
@@ -70,6 +68,8 @@ public class EmulatorDataMgr implements ApplicationRunner {
 
     private static final String ZONE_DATA_FILE_NAME = "." + File.separator + "data" + File.separator + "zones"
         + File.separator + INFO_JSON;
+
+    private static String name = null;
 
     private static String userResourceURL = null;
 
@@ -182,8 +182,8 @@ public class EmulatorDataMgr implements ApplicationRunner {
             if (name == null) {
                 return "Face information does not exist";
             } else {
-                return "{" + "  Face position:" + "  {" + "  bottom: 562," + "  left: 419,"
-                    + "  right: 740," + "  top: 241" + " }," + "  Name " + name + "}";
+                return "{" + "  Face position:" + "  {" + "  bottom: 562," + "  left: 419," + "  right: 740,"
+                    + "  top: 241" + " }," + "  Name " + name + "}";
 
             }
         }
@@ -236,9 +236,8 @@ public class EmulatorDataMgr implements ApplicationRunner {
                 new File(ZONE_ACCESS_POINTS_DATA_FILE_NAME_PREFIX + zoneId + ZONE_ACCESS_POINTS_DATA_FILE_NAME_SUFFIX),
                 AccessPointList.class);
             Map<String, AccessPointInfo> accessPointIdToAccessPointInfoMap = new HashMap<>();
-            accessPointList.getAccessPoint().forEach(accessPointInfo ->
-                accessPointIdToAccessPointInfoMap.put(accessPointInfo.getAccessPointId(), accessPointInfo)
-            );
+            accessPointList.getAccessPoint().forEach(accessPointInfo -> accessPointIdToAccessPointInfoMap
+                .put(accessPointInfo.getAccessPointId(), accessPointInfo));
             zoneIdToAccessPointIdToAccessPointInfoMap.put(zoneId, accessPointIdToAccessPointInfoMap);
             zoneIdToAccessPointResourceURL.put(zoneId, accessPointList.getResourceURL());
         }
@@ -248,26 +247,22 @@ public class EmulatorDataMgr implements ApplicationRunner {
     private void initZoneStatusSubscriptionData() throws IOException {
         InlineResponse2001NotificationSubscriptionList zoneStatusSubscriptionData = new ObjectMapper()
             .readValue(new File(ZONE_STATUS_SUB_DATA_FILE_NAME), InlineResponse2001NotificationSubscriptionList.class);
-        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription ->
-            subIdToZoneStatusSubMap.put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription)
-        );
+        zoneStatusSubscriptionData.getZoneStatusSubscription().forEach(zoneStatusSubscription -> subIdToZoneStatusSubMap
+            .put(zoneStatusSubscription.getClientCorrelator(), zoneStatusSubscription));
         zoneStatusSubResourceURL = zoneStatusSubscriptionData.getResourceURL();
     }
 
     private void initZonalTrafficSubData() throws IOException {
         InlineResponse200NotificationSubscriptionList zonalTrafficSubData = new ObjectMapper()
             .readValue(new File(ZONAL_TRAFFIC_SUB_DATA_FILE_NAME), InlineResponse200NotificationSubscriptionList.class);
-        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription ->
-            subIdToZonalTrafficSubMap.put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription)
-        );
+        zonalTrafficSubData.getZonalTrafficSubscription().forEach(zonalTrafficSubscription -> subIdToZonalTrafficSubMap
+            .put(zonalTrafficSubscription.getClientCorrelator(), zonalTrafficSubscription));
         zonalTrafficSubResourceURL = zonalTrafficSubData.getResourceURL();
     }
 
     private void initUserData() throws IOException {
         UserList userListData = new ObjectMapper().readValue(new File(USER_DATA_FILE_NAME), UserList.class);
-        userListData.getUser().forEach(userInfo ->
-            userIdToUserInfoMap.put(userInfo.getAddress(), userInfo)
-        );
+        userListData.getUser().forEach(userInfo -> userIdToUserInfoMap.put(userInfo.getAddress(), userInfo));
         userResourceURL = userListData.getResourceURL();
     }
 }

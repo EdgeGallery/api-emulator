@@ -263,6 +263,12 @@ public class ZonalPresenceNotification {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(callbackData, zoneId, address, interestRealm, userEventType, currentAccessPointId,
+            previousAccessPointId, timestamp, link);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -280,12 +286,6 @@ public class ZonalPresenceNotification {
             .equals(this.previousAccessPointId, zonalPresenceNotification.previousAccessPointId) && Objects
             .equals(this.timestamp, zonalPresenceNotification.timestamp) && Objects
             .equals(this.link, zonalPresenceNotification.link);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(callbackData, zoneId, address, interestRealm, userEventType, currentAccessPointId,
-            previousAccessPointId, timestamp, link);
     }
 
     @Override
