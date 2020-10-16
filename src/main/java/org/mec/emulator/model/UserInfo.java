@@ -196,53 +196,5 @@ public class UserInfo {
         this.ancillaryInfo = ancillaryInfo;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(address, accessPointId, zoneId, resourceURL, locationInfo, contextLocationInfo, ancillaryInfo);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        UserInfo userInfo = (UserInfo) o;
-        return Objects.equals(this.address, userInfo.address) && Objects
-            .equals(this.accessPointId, userInfo.accessPointId) && Objects.equals(this.zoneId, userInfo.zoneId)
-            && Objects.equals(this.resourceURL, userInfo.resourceURL) && Objects
-            .equals(this.locationInfo, userInfo.locationInfo) && Objects
-            .equals(this.contextLocationInfo, userInfo.contextLocationInfo) && Objects
-            .equals(this.ancillaryInfo, userInfo.ancillaryInfo);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UserInfo {\n");
-        sb.append("    address: ").append(toIndentedString(address)).append("\n");
-        sb.append("    accessPointId: ").append(toIndentedString(accessPointId)).append("\n");
-        sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("    locationInfo: ").append(toIndentedString(locationInfo)).append("\n");
-        sb.append("    contextLocationInfo: ").append(toIndentedString(contextLocationInfo)).append("\n");
-        sb.append("    ancillaryInfo: ").append(toIndentedString(ancillaryInfo)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

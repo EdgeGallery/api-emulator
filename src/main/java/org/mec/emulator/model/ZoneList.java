@@ -93,43 +93,5 @@ public class ZoneList {
         this.resourceURL = resourceURL;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(zone, resourceURL);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        ZoneList zoneList = (ZoneList) object;
-        return Objects.equals(this.zone, zoneList.zone) && Objects.equals(this.resourceURL, zoneList.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ZoneList {\n");
-
-        sb.append("    zone: ").append(toIndentedString(zone)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

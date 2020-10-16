@@ -154,50 +154,5 @@ public class UserTrackingSubscription {
         this.resourceURL = resourceURL;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientCorrelator, callbackReference, address, userEventCriteria, resourceURL);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        UserTrackingSubscription userTrackingSubscription = (UserTrackingSubscription) o;
-        return Objects.equals(this.clientCorrelator, userTrackingSubscription.clientCorrelator) && Objects
-            .equals(this.callbackReference, userTrackingSubscription.callbackReference) && Objects
-            .equals(this.address, userTrackingSubscription.address) && Objects
-            .equals(this.userEventCriteria, userTrackingSubscription.userEventCriteria) && Objects
-            .equals(this.resourceURL, userTrackingSubscription.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UserTrackingSubscription {\n");
-
-        sb.append("    clientCorrelator: ").append(toIndentedString(clientCorrelator)).append("\n");
-        sb.append("    callbackReference: ").append(toIndentedString(callbackReference)).append("\n");
-        sb.append("    address: ").append(toIndentedString(address)).append("\n");
-        sb.append("    userEventCriteria: ").append(toIndentedString(userEventCriteria)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

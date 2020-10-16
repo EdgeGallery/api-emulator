@@ -262,59 +262,5 @@ public class ZonalPresenceNotification {
         this.link = link;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(callbackData, zoneId, address, interestRealm, userEventType, currentAccessPointId,
-            previousAccessPointId, timestamp, link);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ZonalPresenceNotification zonalPresenceNotification = (ZonalPresenceNotification) o;
-        return Objects.equals(this.callbackData, zonalPresenceNotification.callbackData) && Objects
-            .equals(this.zoneId, zonalPresenceNotification.zoneId) && Objects
-            .equals(this.address, zonalPresenceNotification.address) && Objects
-            .equals(this.interestRealm, zonalPresenceNotification.interestRealm) && Objects
-            .equals(this.userEventType, zonalPresenceNotification.userEventType) && Objects
-            .equals(this.currentAccessPointId, zonalPresenceNotification.currentAccessPointId) && Objects
-            .equals(this.previousAccessPointId, zonalPresenceNotification.previousAccessPointId) && Objects
-            .equals(this.timestamp, zonalPresenceNotification.timestamp) && Objects
-            .equals(this.link, zonalPresenceNotification.link);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ZonalPresenceNotification {\n");
-
-        sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-        sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");
-        sb.append("    address: ").append(toIndentedString(address)).append("\n");
-        sb.append("    interestRealm: ").append(toIndentedString(interestRealm)).append("\n");
-        sb.append("    userEventType: ").append(toIndentedString(userEventType)).append("\n");
-        sb.append("    currentAccessPointId: ").append(toIndentedString(currentAccessPointId)).append("\n");
-        sb.append("    previousAccessPointId: ").append(toIndentedString(previousAccessPointId)).append("\n");
-        sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
-        sb.append("    link: ").append(toIndentedString(link)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

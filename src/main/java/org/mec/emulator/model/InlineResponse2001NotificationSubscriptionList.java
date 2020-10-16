@@ -91,46 +91,5 @@ public class InlineResponse2001NotificationSubscriptionList {
         this.resourceURL = resourceURL;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(zoneStatusSubscription, resourceURL);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        InlineResponse2001NotificationSubscriptionList inlineResponse2001NotificationSubscriptionList
-            = (InlineResponse2001NotificationSubscriptionList) o;
-        return Objects
-            .equals(this.zoneStatusSubscription, inlineResponse2001NotificationSubscriptionList.zoneStatusSubscription)
-            && Objects.equals(this.resourceURL, inlineResponse2001NotificationSubscriptionList.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class InlineResponse2001NotificationSubscriptionList {\n");
-
-        sb.append("    zoneStatusSubscription: ").append(toIndentedString(zoneStatusSubscription)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

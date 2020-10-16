@@ -117,46 +117,5 @@ public class AccessPointList {
         this.resourceURL = resourceURL;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(zoneId, accessPoint, resourceURL);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AccessPointList accessPointList = (AccessPointList) o;
-        return Objects.equals(this.zoneId, accessPointList.zoneId) && Objects
-            .equals(this.accessPoint, accessPointList.accessPoint) && Objects
-            .equals(this.resourceURL, accessPointList.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class AccessPointList {\n");
-
-        sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");
-        sb.append("    accessPoint: ").append(toIndentedString(accessPoint)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 
