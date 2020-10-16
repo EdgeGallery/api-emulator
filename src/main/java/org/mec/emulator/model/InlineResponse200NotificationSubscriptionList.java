@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.validation.Valid;
 import org.springframework.validation.annotation.Validated;
 
@@ -88,11 +87,6 @@ public class InlineResponse200NotificationSubscriptionList {
 
     public void setResourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(zonalTrafficSubscription, resourceURL);
     }
 
 }
