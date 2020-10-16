@@ -157,6 +157,9 @@ public class EmulatorDataMgr implements ApplicationRunner {
             .resourceURL(zoneIdToAccessPointResourceURL.get(zoneId));
         Map<String, AccessPointInfo> accessPointIdToAccessPointInfoMap = zoneIdToAccessPointIdToAccessPointInfoMap
             .get(zoneId);
+        if (accessPointIdToAccessPointInfoMap == null) {
+            return accessPointList;
+        }
         accessPointIdToAccessPointInfoMap.forEach((accessPointId, accessPointInfo) -> {
             if (interestRealm != null && !interestRealm.equals(accessPointInfo.getInterestRealm())) {
                 return;
@@ -195,7 +198,7 @@ public class EmulatorDataMgr implements ApplicationRunner {
             return "images upload fail";
         } else {
             String originalFilename = file.getOriginalFilename();
-            if (originalFilename == null) {
+            if (originalFilename == null || originalFilename.equals("")) {
                 return "file does not exist, please upload file";
             }
             name = originalFilename.substring(0, originalFilename.indexOf("."));
@@ -205,7 +208,7 @@ public class EmulatorDataMgr implements ApplicationRunner {
     }
 
     public static String getVideoInfo(Body body) {
-        if (body.getUrl() !=null) {
+        if (body.getUrl() != null) {
             return "Unable to connect to camera url";
         }
         return "Unable to find url";
