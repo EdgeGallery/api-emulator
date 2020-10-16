@@ -126,48 +126,5 @@ public class LocationInfo {
     public void setAccuracy(Integer accuracy) {
         this.accuracy = accuracy;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(latitude, longitude, altitude, accuracy);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LocationInfo locationInfo = (LocationInfo) o;
-        return Objects.equals(this.latitude, locationInfo.latitude) && Objects
-            .equals(this.longitude, locationInfo.longitude) && Objects.equals(this.altitude, locationInfo.altitude)
-            && Objects.equals(this.accuracy, locationInfo.accuracy);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class LocationInfo {\n");
-
-        sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
-        sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
-        sb.append("    altitude: ").append(toIndentedString(altitude)).append("\n");
-        sb.append("    accuracy: ").append(toIndentedString(accuracy)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

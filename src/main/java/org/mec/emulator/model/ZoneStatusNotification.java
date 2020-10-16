@@ -236,58 +236,5 @@ public class ZoneStatusNotification {
         this.link = link;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(callbackData, zoneId, accessPointId, numberOfUsersInZone, numberOfUsersInAP, operationStatus,
-                timestamp, link);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ZoneStatusNotification zoneStatusNotification = (ZoneStatusNotification) o;
-        return Objects.equals(this.callbackData, zoneStatusNotification.callbackData) && Objects
-            .equals(this.zoneId, zoneStatusNotification.zoneId) && Objects
-            .equals(this.accessPointId, zoneStatusNotification.accessPointId) && Objects
-            .equals(this.numberOfUsersInZone, zoneStatusNotification.numberOfUsersInZone) && Objects
-            .equals(this.numberOfUsersInAP, zoneStatusNotification.numberOfUsersInAP) && Objects
-            .equals(this.operationStatus, zoneStatusNotification.operationStatus) && Objects
-            .equals(this.timestamp, zoneStatusNotification.timestamp) && Objects
-            .equals(this.link, zoneStatusNotification.link);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ZoneStatusNotification {\n");
-
-        sb.append("    callbackData: ").append(toIndentedString(callbackData)).append("\n");
-        sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");
-        sb.append("    accessPointId: ").append(toIndentedString(accessPointId)).append("\n");
-        sb.append("    numberOfUsersInZone: ").append(toIndentedString(numberOfUsersInZone)).append("\n");
-        sb.append("    numberOfUsersInAP: ").append(toIndentedString(numberOfUsersInAP)).append("\n");
-        sb.append("    operationStatus: ").append(toIndentedString(operationStatus)).append("\n");
-        sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
-        sb.append("    link: ").append(toIndentedString(link)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

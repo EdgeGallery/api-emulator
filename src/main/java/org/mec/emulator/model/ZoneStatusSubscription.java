@@ -212,55 +212,5 @@ public class ZoneStatusSubscription {
         this.operationStatus = operationStatus;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientCorrelator, resourceURL, callbackReference, zoneId, numberOfUsersZoneThreshold,
-            numberOfUsersAPThreshold, operationStatus);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ZoneStatusSubscription zoneStatusSubscription = (ZoneStatusSubscription) o;
-        return Objects.equals(this.clientCorrelator, zoneStatusSubscription.clientCorrelator) && Objects
-            .equals(this.resourceURL, zoneStatusSubscription.resourceURL) && Objects
-            .equals(this.callbackReference, zoneStatusSubscription.callbackReference) && Objects
-            .equals(this.zoneId, zoneStatusSubscription.zoneId) && Objects
-            .equals(this.numberOfUsersZoneThreshold, zoneStatusSubscription.numberOfUsersZoneThreshold) && Objects
-            .equals(this.numberOfUsersAPThreshold, zoneStatusSubscription.numberOfUsersAPThreshold) && Objects
-            .equals(this.operationStatus, zoneStatusSubscription.operationStatus);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ZoneStatusSubscription {\n");
-
-        sb.append("    clientCorrelator: ").append(toIndentedString(clientCorrelator)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("    callbackReference: ").append(toIndentedString(callbackReference)).append("\n");
-        sb.append("    zoneId: ").append(toIndentedString(zoneId)).append("\n");
-        sb.append("    numberOfUsersZoneThreshold: ").append(toIndentedString(numberOfUsersZoneThreshold)).append("\n");
-        sb.append("    numberOfUsersAPThreshold: ").append(toIndentedString(numberOfUsersAPThreshold)).append("\n");
-        sb.append("    operationStatus: ").append(toIndentedString(operationStatus)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

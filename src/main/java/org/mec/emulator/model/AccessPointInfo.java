@@ -235,50 +235,5 @@ public class AccessPointInfo {
                 resourceURL);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AccessPointInfo accessPointInfo = (AccessPointInfo) o;
-        return Objects.equals(this.accessPointId, accessPointInfo.accessPointId) && Objects
-            .equals(this.locationInfo, accessPointInfo.locationInfo) && Objects
-            .equals(this.connectionType, accessPointInfo.connectionType) && Objects
-            .equals(this.operationStatus, accessPointInfo.operationStatus) && Objects
-            .equals(this.numberOfUsers, accessPointInfo.numberOfUsers) && Objects
-            .equals(this.timezone, accessPointInfo.timezone) && Objects
-            .equals(this.interestRealm, accessPointInfo.interestRealm) && Objects
-            .equals(this.resourceURL, accessPointInfo.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class AccessPointInfo {\n");
-        sb.append("    accessPointId: ").append(toIndentedString(accessPointId)).append("\n");
-        sb.append("    locationInfo: ").append(toIndentedString(locationInfo)).append("\n");
-        sb.append("    connectionType: ").append(toIndentedString(connectionType)).append("\n");
-        sb.append("    operationStatus: ").append(toIndentedString(operationStatus)).append("\n");
-        sb.append("    numberOfUsers: ").append(toIndentedString(numberOfUsers)).append("\n");
-        sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
-        sb.append("    interestRealm: ").append(toIndentedString(interestRealm)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 

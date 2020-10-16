@@ -91,43 +91,5 @@ public class UserList {
         this.resourceURL = resourceURL;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(user, resourceURL);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        UserList userList = (UserList) o;
-        return Objects.equals(this.user, userList.user) && Objects.equals(this.resourceURL, userList.resourceURL);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class UserList {\n");
-
-        sb.append("    user: ").append(toIndentedString(user)).append("\n");
-        sb.append("    resourceURL: ").append(toIndentedString(resourceURL)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
 }
 
