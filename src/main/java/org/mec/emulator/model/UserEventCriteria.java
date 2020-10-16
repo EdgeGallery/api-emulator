@@ -19,7 +19,6 @@ package org.mec.emulator.model;
 
 import io.swagger.annotations.ApiModel;
 import java.util.ArrayList;
-import java.util.Objects;
 import org.springframework.validation.annotation.Validated;
 
 /**
