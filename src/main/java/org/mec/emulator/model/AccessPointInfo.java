@@ -20,7 +20,6 @@ package org.mec.emulator.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
@@ -226,13 +225,6 @@ public class AccessPointInfo {
 
     public void setResourceURL(String resourceURL) {
         this.resourceURL = resourceURL;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(accessPointId, locationInfo, connectionType, operationStatus, numberOfUsers, timezone, interestRealm,
-                resourceURL);
     }
 
 }
