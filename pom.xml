@@ -241,6 +241,9 @@
                 <configuration>
                     <destFile>target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>target/coverage-reports/jacoco-unit.exec</dataFile>
+                    <excludes>
+                        <exclude>**/model/*.class</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
