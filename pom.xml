@@ -254,7 +254,11 @@
                     <destFile>target/coverage-reports/jacoco-unit.exec</destFile>
                     <dataFile>target/coverage-reports/jacoco-unit.exec</dataFile>
                     <excludes>
-                        <exclude>**/model/*.*</exclude>
+                        <exclude>**/model/*Link.*</exclude>
+                        <exclude>**/model/*Criteria.*</exclude>
+                        <exclude>**/model/*Tracking*.*</exclude>
+                        <exclude>**/model/*Notification.*</exclude>
+                        <exclude>**/model/*ResponseMessage.*</exclude>
                         <exclude>**/exception/*.*</exclude>
                     </excludes>
                 </configuration>
