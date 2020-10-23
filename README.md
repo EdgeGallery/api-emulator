@@ -1,7 +1,7 @@
 # api-emulator
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![Jenkins](https://img.shields.io/jenkins/build?jobUrl=http%3A%2F%2Fjenkins.edgegallery.org%2Fview%2FMEC-PLATFORM-BUILD%2Fjob%2Fapi-emulator-docker-image-build-update-daily-master%2F)
+
 
 api-emulator模块，为EdgeGallery提供了基本能力的模拟api，开发者可以调用该模拟器提供的api，不需要真实部署就可以查看平台已有的能力。目前该api-emulator集成了两种平台能力：位置服务和人脸识别能力。
 
