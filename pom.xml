@@ -24,7 +24,7 @@
     <version>1.0.0</version>
     <properties>
         <java.version>1.8</java.version>
-        <lombok.version>1.18.6</lombok.version>
+        <lombok.version>1.18.10</lombok.version>
         <gson.version>2.8.5</gson.version>
         <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
         <swagger-annotations-version>1.5.21</swagger-annotations-version>
@@ -52,35 +52,34 @@
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
+            <version>2.3.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <version>2.3.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.13.2</version>
+            <version>2.13.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.13.2</version>
+            <version>2.13.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
             <version>9.0.37</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.26</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-websocket -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-websocket</artifactId>
@@ -89,12 +88,12 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.13.2</version>
+            <version>2.13.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jcl</artifactId>
-            <version>2.13.2</version>
+            <version>2.13.3</version>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
@@ -129,7 +128,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
         <!-- gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -139,13 +142,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.4.10</version>
+            <version>2.0.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
