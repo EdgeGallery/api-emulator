@@ -103,7 +103,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-http</artifactId>
-            <version>9.4.32.v20200930</version>
+            <version>9.4.33.v20201020</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jetty-util</artifactId>
@@ -114,7 +114,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
-            <version>9.4.30.v20200611</version>
+            <version>9.4.33.v20201020</version>
         </dependency>
 
         <dependency>
