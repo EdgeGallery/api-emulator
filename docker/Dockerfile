@@ -13,38 +13,49 @@
 # limitations under the License.
 
 FROM openjdk:8u201-jdk-alpine
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
+
+ENV TZ='Asia/Shanghai'
 ENV APP_FILE api-emulator-1.0.0.jar
-ENV HOME /usr/edgegallery
+ENV APP_HOME /usr/app
 ENV UID=166
 ENV GID=166
 ENV USER_NAME=eguser
 ENV GROUP_NAME=eggroup
 
-## create own user and group
+RUN sed -i "s|umask 022|umask 027|g" /etc/profile
+
+RUN mkdir -p /usr/app
+RUN mkdir -p /usr/app/bin
+RUN mkdir -p /usr/app/lib
+
+# Create an app user so our program doesn't run as root.
 RUN apk update &&\
     apk add shadow &&\
-    mkdir -p $HOME &&\
     groupadd -r -g $GID $GROUP_NAME &&\
-    useradd -r -u $UID -g $GID -d $HOME $USER_NAME &&\
-    chown -R $USER_NAME:$GROUP_NAME $HOME
+    useradd -r -u $UID -g $GID -d $APP_HOME -s /sbin/nologin -c "Docker image user" $USER_NAME
 
-COPY --chown=$USER_NAME:$GROUP_NAME target/output $HOME/
+WORKDIR $APP_HOME
 
-WORKDIR $HOME
+COPY target/*.jar $APP_HOME/bin
+COPY target/output $APP_HOME
+COPY lib/*.jar  $APP_HOME/lib/
 
-## modify mode
-RUN chmod 750 $HOME &&\
-    chmod -R 550 $HOME/lib &&\
-    chmod 550 $HOME/$APP_FILE &&\
-    chmod -R 700 $HOME/data &&\
-    mkdir -p -m 700 $HOME/ssl &&\
-    mkdir -p -m 750 $HOME/log &&\
-    chown -R $USER_NAME:$GROUP_NAME $HOME
+RUN chmod 750 $APP_HOME &&\
+    chmod -R 550 $APP_HOME/bin &&\
+    mkdir -p -m 750 $APP_HOME/log &&\
+    mkdir -p -m 700 $APP_HOME/ssl &&\
+    chown -R $USER_NAME:$GROUP_NAME $APP_HOME &&\
+    chown -R $USER_NAME:$GROUP_NAME $APP_HOME/log
+
 
 USER $USER_NAME
 
 EXPOSE 8089
 
+
+# Execute script & application
 ENTRYPOINT ["sh", "-c"]
-CMD ["exec java -jar $APP_FILE"]
+CMD ["exec java -jar ./bin/$APP_FILE"]
+
