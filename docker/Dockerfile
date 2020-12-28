@@ -21,6 +21,7 @@ ENV GID=166
 ENV USER_NAME=eguser
 ENV GROUP_NAME=eggroup
 
+RUN mkdir -p /usr/app
 ## create own user and group
 RUN apk update &&\
     apk add shadow &&\
@@ -29,9 +30,10 @@ RUN apk update &&\
     useradd -r -u $UID -g $GID -d $HOME $USER_NAME &&\
     chown -R $USER_NAME:$GROUP_NAME $HOME
 
-COPY --chown=$USER_NAME:$GROUP_NAME target/output $HOME/
 
 WORKDIR $HOME
+
+COPY target/output $HOME/
 
 ## modify mode
 RUN chmod 750 $HOME &&\
