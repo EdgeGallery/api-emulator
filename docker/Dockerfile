@@ -33,16 +33,13 @@ RUN apk update &&\
 
 WORKDIR $HOME
 
-COPY target/output $HOME/
-
 ## modify mode
 RUN chmod 750 $HOME &&\
-    chmod -R 550 $HOME/lib &&\
-    chmod 550 $HOME/$APP_FILE &&\
-    chmod -R 700 $HOME/data &&\
     mkdir -p -m 700 $HOME/ssl &&\
     mkdir -p -m 750 $HOME/log &&\
     chown -R $USER_NAME:$GROUP_NAME $HOME
+
+COPY --chown=$USER_NAME:$GROUP_NAME target/output $HOME/
 
 USER $USER_NAME
 
