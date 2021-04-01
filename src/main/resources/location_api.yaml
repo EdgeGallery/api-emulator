@@ -1,19 +1,5 @@
-swagger: '2.0'
-info:
-  title: Location API
-  version: 1.0.0
-  description: >-
-    The ETSI MEC ISG MEC013 Location API described using OpenAPI. 
-    The API is based on the Open Mobile Alliance's specification RESTful Network API for Zonal Presence
-externalDocs:
-  description: ETSI MEC013 V1.1.1 Location Service API
-  url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/01.01.01_60/gs_mec013v010101p.pdf'
-host: '127.0.0.1:8081'
-basePath: /mep/location/v1
-schemes:
-  - http
 #
-# Copyright 2020 Huawei Technologies Co., Ltd.
+# Copyright 2021 Huawei Technologies Co., Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +14,20 @@ schemes:
 # limitations under the License.
 #
 
+swagger: '2.0'
+info:
+  title: Location API
+  version: 1.0.0
+  description: >-
+    The ETSI MEC ISG MEC013 Location API described using OpenAPI. 
+    The API is based on the Open Mobile Alliance's specification RESTful Network API for Zonal Presence
+externalDocs:
+  description: ETSI MEC013 V1.1.1 Location Service API
+  url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/01.01.01_60/gs_mec013v010101p.pdf'
+host: '127.0.0.1:8081'
+basePath: /mep/location/v1
+schemes:
+  - http
 consumes:
   - application/json
 produces:
