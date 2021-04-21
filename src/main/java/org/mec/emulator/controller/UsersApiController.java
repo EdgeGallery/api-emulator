@@ -1,5 +1,5 @@
 /*
- *   Copyright 2020 Huawei Technologies Co., Ltd.
+ *   Copyright 2020-2021 Huawei Technologies Co., Ltd.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -36,6 +36,12 @@ public class UsersApiController implements UsersApi {
 
     @Autowired
     private UsersApiService usersApiService;
+
+    public ResponseEntity<Object> usersGet(
+        @NotNull @ApiParam(value = "address", required = true) @Valid @RequestParam(value = "address", required = true)
+            String address) {
+        return new ResponseEntity<>(usersApiService.usersGet(address), HttpStatus.OK);
+    }
 
     public ResponseEntity<Object> usersGet(
         @NotNull @ApiParam(value = "Zone ID", required = true) @Valid @RequestParam(value = "zoneId", required = true)
