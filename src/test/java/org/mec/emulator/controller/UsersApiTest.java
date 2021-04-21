@@ -49,7 +49,7 @@ public class UsersApiTest {
         String zoneId = "38b8ae9e-cbe2-4ce5-8ba9-4bf05481e6c3";
         String accessPointId = "933d3eb5-ff66-43e4-8434-28b1212ea1cc";
         ResultActions result = mvc.perform(
-            MockMvcRequestBuilders.get("/mep/location/v1/users?zoneId=" + zoneId + "&accessPointId=" + accessPointId)
+            MockMvcRequestBuilders.get("/mep/location/v1/user?zoneId=" + zoneId + "&accessPointId=" + accessPointId)
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
         Assert.assertEquals(result.andReturn().getResponse().getStatus(), 200);
@@ -58,7 +58,7 @@ public class UsersApiTest {
     @Test
     public void testUsersGetByIdSuccess() throws Exception {
         ResultActions result = mvc.perform(
-            MockMvcRequestBuilders.get("/mep/location/v1/users/" + UUID.randomUUID().toString())
+            MockMvcRequestBuilders.get("/mep/location/v1/user/" + UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
         Assert.assertEquals(result.andReturn().getResponse().getStatus(), 200);

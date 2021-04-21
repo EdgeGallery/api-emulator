@@ -1,5 +1,5 @@
 /*
- *   Copyright 2020 Huawei Technologies Co., Ltd.
+ *   Copyright 2020-2021 Huawei Technologies Co., Ltd.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -18,10 +18,14 @@
 package org.mec.emulator.controller;
 
 import io.swagger.annotations.ApiParam;
+import java.util.UUID;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.mec.emulator.api.SubscriptionsApi;
 import org.mec.emulator.model.InlineResponse200;
 import org.mec.emulator.model.InlineResponse2001;
+import org.mec.emulator.model.UserLocationSubscribe;
+import org.mec.emulator.model.UserLocationSubscribeResult;
 import org.mec.emulator.model.ZonalTrafficSubscription;
 import org.mec.emulator.model.ZoneStatusSubscription;
 import org.mec.emulator.service.SubscriptionsApiService;
@@ -83,4 +87,17 @@ public class SubscriptionsApiController implements SubscriptionsApi {
 
     }
 
+    public ResponseEntity<Object> subscribeLocation(
+        @NotNull @ApiParam(value = "periodic subscription", required = true) @Valid @RequestBody
+            UserLocationSubscribe requestData) {
+        UserLocationSubscribeResult subResult = new UserLocationSubscribeResult();
+        subResult.setSubscriptionId(UUID.randomUUID().toString());
+        return new ResponseEntity<>(subResult, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<String> unsubscribeLocation(
+        @NotNull @ApiParam(value = "subscription id", required = true) @Valid @PathVariable
+            String subscriptionId) {
+        return new ResponseEntity<>("{}", HttpStatus.NO_CONTENT);
+    }
 }
