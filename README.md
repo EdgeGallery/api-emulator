@@ -32,7 +32,7 @@ api-emulator模块，为EdgeGallery提供了基本能力的模拟api，开发者
   3. 对于摄像头中的人脸识别，输入摄像头的url，即可。
   
   **3.使用方法：** 
-  登录EdgeGallery开发者平台：https://159.138.133.87:30092 。
+  登录EdgeGallery开发者平台。
   新建项目后会自动启动一个api-emulator容器，界面会弹出API详情，开发者输入参数直接调用api即可。
   
   - **制作镜像：** 推荐使用/docker/Dockerfile文件进行镜像的制作，Dockerfile文件需要与项目打包生成的target文件夹放在同一级目录中，否则无法找到可执行jar包和依赖项。
