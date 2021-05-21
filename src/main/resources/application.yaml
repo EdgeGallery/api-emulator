@@ -22,6 +22,6 @@ server:
   ssl:
     enabled: true
     key-store: classpath:keystore.p12
-    key-store-password: te9Fmv%qaq
+    key-store-password: ${SSL_KEY_STORE_PASSWORD:}
     key-store-type: PKCS12
     key-alias: edgegallery
