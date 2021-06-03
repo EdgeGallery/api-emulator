@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 区域跟踪订阅
+ * Regional tracking subscription
  */
 @ApiModel(description = "区域跟踪订阅")
 @Validated

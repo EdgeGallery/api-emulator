@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 位置的经纬度信息
+ * Location's latitude and longitude information
  */
 @ApiModel(description = "位置的经纬度信息")
 @Validated

@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 接入点信息的类型定义
+ * Type definition of access point information
  */
 @ApiModel(description = "接入点信息的类型定义")
 @Validated

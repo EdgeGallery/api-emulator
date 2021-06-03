@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * 接入点的操作状态
+ * Operating status of the access point
  */
 public enum OperationStatus {
 

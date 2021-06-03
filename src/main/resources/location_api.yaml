@@ -581,7 +581,7 @@ definitions:
       resourceURL:
         type: string
 #  Address:
-#    description: '用户地址(e.g. "sip" URI, "tel" URI, "acr" URI).'
+#    description: 'User address(e.g. "sip" URI, "tel" URI, "acr" URI).'
 #    type: string
 #    format: uri
 #    example: 'acr:192.0.2.1'
@@ -675,42 +675,42 @@ definitions:
         format: int32
         example: 10
 #  NotifyURL:
-#    description: app的侦听回调的URL。
+#    description: appListen for callbackURL。
 #    type: string
 #    format: url
 #    example: 'http://clientApp.example.com/location_notifications/123456'
 #  NumberOfAccessPoints:
-#    description: 接入点数量
+#    description: Number of access points
 #    type: integer
 #    format: uint32
 #    example: 10
 #  NumberOfUnserviceableAccessPoints:
-#    description: 不可用的接入点数量
+#    description: Number of unavailable access points
 #    type: integer
 #    format: uint32
 #    example: 9
 #  NumberOfUsers:
-#    description: 用户数
+#    description: User number
 #    type: integer
 #    format: uint32
 #    example: 7
 #  NumberOfUsersAPThreshold:
-#    description: 通知门限，如果接入点用户数达到该门限，触发通知
+#    description: Notification threshold，If the number of access point users reaches the threshold，Trigger notification
 #    type: integer
 #    format: uint32
 #    example: 20
 #  NumberOfUsersInAP:
-#    description: 接入点中的用户数
+#    description: Number of users in the access point
 #    type: integer
 #    format: uint32
 #    example: 12
 #  NumberOfUsersInZone:
-#    description: 地域中的用户数
+#    description: Number of users in the region
 #    type: integer
 #    format: uint32
 #    example: 20
 #  NumberOfUsersZoneThreshold:
-#    description: 通知门限，如果地域中用户数达到该门限，触发通知
+#    description: Notification threshold，If the number of users in the region reaches the threshold，Trigger notification
 #    type: integer
 #    format: uint32
 #    example: 40
@@ -727,17 +727,17 @@ definitions:
 #    type: string
 #    example: zone02
 #  ResourceURL:
-#    description: 资源的URL
+#    description: ResourcesURL
 #    type: string
 #    format: uri
 #    example: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
 #  Timestamp:
-#    description: 时间戳
+#    description: Timestamp
 #    type: string
 #    format: date-time
 #    example: '2017-01-01T02:51:43Z'
 #  Timezone:
-#    description: 时区
+#    description: Time zone
 #    type: string
 #    format: date-time
 #    example: '2017-01-01T02:51:43Z'
@@ -867,7 +867,7 @@ definitions:
       resourceURL:
         type: string
 #  ZoneId:
-#    description: 区域ID
+#    description: areaID
 #    type: string
 #    example: zone01
   ZoneInfo:

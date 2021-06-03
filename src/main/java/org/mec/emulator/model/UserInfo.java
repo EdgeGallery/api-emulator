@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 用户信息
+ * User Info
  */
 @ApiModel(description = "用户信息")
 @Validated

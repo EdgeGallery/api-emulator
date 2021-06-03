@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 区域状态改变的订阅消息
+ * Subscribe to the status change of the area
  */
 @ApiModel(description = "区域状态改变的订阅消息")
 @Validated

@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 区域信息
+ * Area information
  */
 @ApiModel(description = "区域信息")
 @Validated
