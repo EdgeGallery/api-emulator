@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 用于生成通知的用户事件值列表（这些适用于指定的地址）。如果缺少此元素，则会要求为用户事件中的任何更改生成通知。
+ * List of user event values ​​used to generate notifications（These apply to the specified address）。If this element is missing，Will ask to generate notifications for any changes in user events。
  */
 @ApiModel(description = "用于生成通知的用户事件值列表（这些适用于指定的地址）。如果缺少此元素，则会要求为用户事件中的任何更改生成通知。")
 @Validated

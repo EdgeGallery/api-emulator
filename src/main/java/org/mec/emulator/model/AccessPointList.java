@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 接入点列表
+ * Access point list
  */
 @ApiModel(description = "接入点列表")
 @Validated

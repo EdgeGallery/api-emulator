@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 用户列表
+ * user list
  */
 @ApiModel(description = "用户列表")
 @Validated
@@ -55,7 +55,7 @@ public class UserList {
     }
 
     /**
-     * 区域用户信息列表。
+     * Regional user information list。
      *
      * @return user
      **/
@@ -81,7 +81,7 @@ public class UserList {
     }
 
     /**
-     * 获取资源列表
+     * Get a list of resources
      **/
     @ApiModelProperty(required = true, value = "")
     @NotNull

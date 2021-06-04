@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 /**
- * 包含用户跟踪订阅的类型。
+ * Contains the type of user tracking subscription。
  */
 @ApiModel(description = "包含用户跟踪订阅的类型。")
 @Validated
