@@ -46,4 +46,4 @@ USER $USER_NAME
 EXPOSE 8089
 
 ENTRYPOINT ["sh", "-c"]
-CMD ["exec java -jar $APP_FILE"]
+CMD ["exec java -Dlog4j2.formatMsgNoLookups=true -jar $APP_FILE"]
